@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:14:12 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/17 17:03:56 by ythomas          ###   ########.fr       */
+/*   Updated: 2018/12/29 11:51:30 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		x_origine(char **file)
 			if (file[i][j] == '#' && j < x)
 			{
 				x = j;
-				break;
+				break ;
 			}
 			j++;
 		}
@@ -53,7 +53,7 @@ int		y_origine(char **file)
 			if (file[i][j] == '#' && i < y)
 			{
 				y = i;
-				break;
+				break ;
 			}
 			i++;
 		}

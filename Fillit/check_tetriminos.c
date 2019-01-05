@@ -6,14 +6,14 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 16:50:09 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/19 13:19:24 by ythomas          ###   ########.fr       */
+/*   Updated: 2018/12/29 11:44:57 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "fillit.h"
 
-static int		ft_checkfile(char **file, int size)
+static int			ft_checkfile(char **file, int size)
 {
 	int i;
 	int y;
@@ -28,7 +28,7 @@ static int		ft_checkfile(char **file, int size)
 		if (((i + 1) % 5) != 0 && (file[i][0] != '#' && file[i][0] != '.'))
 			return (-1);
 		y = 0;
-		while(file[i][y])
+		while (file[i][y])
 		{
 			if (y > 3 || (file[i][y] != '#' && file[i][y] != '.'))
 				return (-1);
@@ -79,13 +79,13 @@ static int			ft_is_tetriminos(char **file)
 		y = 1;
 		while (file[i][y])
 		{
-			if (file[i][y] == '#' && file[i][y+1] == '#')
+			if (file[i][y] == '#' && file[i][y + 1] == '#')
 				z++;
-			if (file[i][y] == '#' && file[i+1][y] == '#')
+			if (file[i][y] == '#' && file[i + 1][y] == '#')
 				z++;
-			if (file[i][y] == '#' && file[i][y-1] == '#')
+			if (file[i][y] == '#' && file[i][y - 1] == '#')
 				z++;
-			if (file[i][y] == '#' && file[i-1][y] == '#')
+			if (file[i][y] == '#' && file[i - 1][y] == '#')
 				z++;
 			y++;
 		}
@@ -110,11 +110,11 @@ static int			ft_check_tetriminos(char **file, int size)
 	return (1);
 }
 
-char	**ft_creat_file(int fd)
+char				**ft_creat_file(int fd)
 {
-	char *line;
-	char **file;
-	int i;
+	char	*line;
+	char	**file;
+	int		i;
 
 	i = 0;
 	if (!(file = (char **)malloc(sizeof(char *) * 130)))
@@ -125,16 +125,16 @@ char	**ft_creat_file(int fd)
 		i++;
 		free(line);
 		line = NULL;
-		if (i > 129) // Taille max pour 26 tetriminos
+		if (i > 129)
 			return (NULL);
 	}
 	if (i < 4)
 		return (NULL);
 	else
 		file[i] = 0;
-	if ((ft_checkfile(file, i)) == -1)/*check le formatage du fichier (hauteur, largeur, # ou . et espaces)*/
+	if ((ft_checkfile(file, i)) == -1)
 		return (NULL);
-	if ((ft_check_tetriminos(file, i)) == -1)/*check si tetriminos == 4# et si tetriminos est bien valide*/
+	if ((ft_check_tetriminos(file, i)) == -1)
 		return (NULL);
 	return (file);
 }

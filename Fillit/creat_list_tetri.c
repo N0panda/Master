@@ -6,15 +6,13 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 18:04:09 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/23 14:41:33 by ythomas          ###   ########.fr       */
+/*   Updated: 2018/12/29 11:47:51 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-
-
-int		check_hauteur(char **tetriminos) // -------------- OK
+int			check_hauteur(char **tetriminos)
 {
 	int i;
 	int y;
@@ -30,7 +28,7 @@ int		check_hauteur(char **tetriminos) // -------------- OK
 			if (tetriminos[i][y] == '#')
 			{
 				b++;
-				break;
+				break ;
 			}
 			y++;
 		}
@@ -39,7 +37,7 @@ int		check_hauteur(char **tetriminos) // -------------- OK
 	return (b);
 }
 
-int		check_largeur(char **tetriminos) // -------------- OK
+int			check_largeur(char **tetriminos)
 {
 	int i;
 	int y;
@@ -55,7 +53,7 @@ int		check_largeur(char **tetriminos) // -------------- OK
 			if (tetriminos[i][y] == '#')
 			{
 				b++;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -64,10 +62,10 @@ int		check_largeur(char **tetriminos) // -------------- OK
 	return (b);
 }
 
-t_tetri		*creat_tetri_maillon(char **file) // transforme le file correcte en liste chaine de tetriminos.
+t_tetri		*creat_tetri_maillon(char **file)
 {
-	t_tetri *tetri;
-	int i;
+	t_tetri		*tetri;
+	int			i;
 
 	i = 0;
 	if (!(tetri = (t_tetri*)malloc(sizeof(t_tetri))))
@@ -83,7 +81,7 @@ t_tetri		*creat_tetri_maillon(char **file) // transforme le file correcte en lis
 	tetri->hauteur = check_hauteur(file);
 	tetri->largeur = check_largeur(file);
 	tetri->x = x_origine(file);
-	tetri->y= y_origine(file);
+	tetri->y = y_origine(file);
 	tetri->used = 0;
 	tetri->px = 0;
 	tetri->py = 0;
@@ -93,9 +91,9 @@ t_tetri		*creat_tetri_maillon(char **file) // transforme le file correcte en lis
 
 t_tetri		*creat_list(char **file)
 {
-	int i;
-	t_tetri *tetri;
-	t_tetri *maillon;
+	int			i;
+	t_tetri		*tetri;
+	t_tetri		*maillon;
 
 	tetri = creat_tetri_maillon(file);
 	tetri->lettre = 'A';

@@ -6,18 +6,17 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:28:58 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/19 13:23:13 by ythomas          ###   ########.fr       */
+/*   Updated: 2018/12/29 11:53:13 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	**creat_temp_file(char **file)
 {
 	char	**tmp;
 	int		i;
-	char 	*temp;
+	char	*temp;
 
 	if (!(tmp = (char**)malloc(sizeof(char*) * 6)))
 		return (NULL);
@@ -50,7 +49,7 @@ void	del_temp(char **tmp, int size)
 		tmp[i] = NULL;
 		i++;
 	}
-	free (tmp);
+	free(tmp);
 }
 
 void	ft_error(int type)
