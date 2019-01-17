@@ -68,6 +68,8 @@ t_flag	*ft_get_flag(char *f, int len)
 			flag->space = 1;
 		i++;
 	}
+	if (flag->zero == 1 && flag->minus == 1)
+		flag->zero = 0;
 	return (flag);
 }
 

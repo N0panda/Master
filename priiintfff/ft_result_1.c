@@ -14,52 +14,99 @@
 
 char	*ft_get_result_s(t_param *list)
 {
-	//flag -
+	char 	*str;
+	int		i;
+
+	i = 0;
+	str = (char *)list->variable;
+	if (ft_strlen(str) < list->range)
+	{
+		if (!(list->result = ft_strnew(list->range)))
+			return (NULL);
+		if (list->flag->minus == 1)
+		{
+			i = ft_strlen(str);
+			while (i < list->range)
+				list->result[i++] = ' ';
+			i = 0;
+		}
+		else
+			while (i < (list->range - ft_strlen(str)))
+				list->result[i++] = ' ';
+	}
+	else
+		if (!(list->result = ft_strnew(ft_strlen(str))))
+			return (NULL);
+	ft_memmove(list->result + i, str, ft_strlen(str));
+	return (list->result);
 }
 
 char	*ft_get_result_c(t_param *list)
 {
-	//pour char : flag '-'
-	//pour % : flag '-' '0' et fonctionnent aussi mais ne donne rien '+' ' ' '#'
+	int		i;
+	char	c;
+
+	i = 0;
+	c = ' ';
+	if (list->range > 1)
+	{
+		if (!(list->result = ft_strnew(list->range)))
+			return (NULL);
+		if (list->conversion == '%' && list->flag->zero == 1)
+			c = '0';
+		while (i < list->range)
+			list->result[i++] = c;
+		if (list->flag->minus == 1)
+			i = 1;
+		i--;
+	}
+	else
+		if (!(list->result = ft_strnew(1)))
+			return (NULL);
+	list->result[i] = (char)list->variable;
+	return (list->result);
 }
 
-char	*ft_get_result_d(t_param *list)
-{
+ char	*ft_get_result_d(t_param *list)
+ {
+ 	char *str;
 
-}
+ 	str = ft_itoa((int)list->variable);
+ 	return (str);
+ }
 
-char	*ft_get_result_u(t_param *list)
-{
+// char	*ft_get_result_u(t_param *list)
+// {
+// 	;
+// }
 
-}
 
+// char	*ft_get_result_i(t_param *list)
+// {
+// 	;
+// }
 
-char	*ft_get_result_i(t_param *list)
-{
+// char	*ft_get_result_p(t_param *list)
+// {
+// 	;
+// }
 
-}
+// char	*ft_get_result_xX(t_param *list)
+// {
+// 	;
+// }
 
-char	*ft_get_result_p(t_param *list)
-{
+// char	*ft_get_result_f(t_param *list)
+// {
+// 	;
+// }
 
-}
+// char	*ft_get_result_o(t_param *list)
+// {
+// 	;
+// }
 
-char	*ft_get_result_xX(t_param *list)
-{
-
-}
-
-char	*ft_get_result_f(t_param *list)
-{
-
-}
-
-char	*ft_get_result_o(t_param *list)
-{
-
-}
-
-t_pram	*ft_get_result(t_param *list)
+t_param		*ft_get_result(t_param *list)
 {
 	t_param		*depart;
 
@@ -69,21 +116,21 @@ t_pram	*ft_get_result(t_param *list)
 		if (list->conversion == 's')
 			list->result = ft_get_result_s(list);
 		else if (list->conversion == 'c' || list->conversion == '%')
-			list->result = ft_get_result_c(list);
+		 	list->result = ft_get_result_c(list);
 		else if (list->conversion == 'd')
-			list->result = ft_get_result_d(list);
-		else if (list->conversion == 'u')
-			list->result = ft_get_result_u(list);
-		else if (list->conversion == 'i')
-			list->result = ft_get_result_i(list);
-		else if (list->conversion == 'p')
-			list->result = ft_get_result_p(list);
-		else if (list->conversion == 'x' || list->conversion == 'X')
-			list->result = ft_get_result_xX(list);
-		else if (list->conversion == 'f')
-			list->result = ft_get_result_f(list);
-		else if (list->conversion == 'o')
-			list->result = ft_get_result_o(list);
+		 	list->result = ft_get_result_d(list);
+		// else if (list->conversion == 'u')
+		// 	list->result = ft_get_result_u(list);
+		// else if (list->conversion == 'i')
+		// 	list->result = ft_get_result_i(list);
+		// else if (list->conversion == 'p')
+		// 	list->result = ft_get_result_p(list);
+		// else if (list->conversion == 'x' || list->conversion == 'X')
+		// 	list->result = ft_get_result_xX(list);
+		// else if (list->conversion == 'f')
+		// 	list->result = ft_get_result_f(list);
+		// else if (list->conversion == 'o')
+		// 	list->result = ft_get_result_o(list);
 		list = list->next;
 	}
 	return (depart);

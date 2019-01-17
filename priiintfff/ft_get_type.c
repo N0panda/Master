@@ -53,9 +53,7 @@ uint64_t		ft_get_var_uoxX(t_param *list, va_list ap)
 uint64_t		ft_get_var_float(t_param *list, va_list ap)
 {
 	if (list->modifier == 5)
-		return (list->variable = (uint64_t)(va_arg(ap, long double)));
-	if (list->modifier == 3)
-		return (list->variable = (uint64_t)(va_arg(ap, double)));
+		return (list->variable = (uint64_t)(va_arg(ap, long double)));//attention taille de 128bits
 	else
-		return (list->variable = (uint64_t)(va_arg(ap, float)));
+		return (list->variable = (uint64_t)(va_arg(ap, double)));
 }

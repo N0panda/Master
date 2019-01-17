@@ -107,16 +107,16 @@ void	ft_affiche_list(t_param *list)
 	// printf("conv : %c ",list->conversion);
 	// printf("modi : %d ",list->modifier);
 	// printf("prec : %d ",list->precision);
-	// printf("rang : %d\n",list->range);
+	//printf("rang : %d\n",list->range);
 	// printf("s : %d a : %d z : %d, m : %d, p : %d\n", list->flag->space, list->flag->ash, list->flag->zero, list->flag->minus, list->flag->plus);
 	if (list->conversion == 'i')
 		ft_putnbr((long int)(list->variable));	
 	if (list->conversion == 'd')
-		ft_putnbr((long int)(list->variable));
-	else if (list->conversion == 'c')
-		ft_putchar((char)(list->variable));
+		ft_putstr((list->result));
+	else if (list->conversion == 'c' || list->conversion == '%')
+		ft_putstr((list->result));
 	else if (list->conversion == 's')
-		ft_putstr((char *)(list->variable));
+		ft_putstr((list->result));
 	if (list->next != NULL)
 		return (ft_affiche_list(list->next));
 }
@@ -148,14 +148,10 @@ int		ft_printf(const char *format, ...)
 
 int		main(void)
 {
-	long int a = 070;
-	char b[11] = "1234567890";
-	char c = 'c';
-	char d[6] = "12345";
+	int i = 255;
 
-	int test = 110;
-	ft_printf("%i %d", a, a);
-	// printf("%         ++--+-+--+--0000      #10d", test);
+	//printf("% d\n", i);
+	ft_printf("%d", i);
 	return 0;
 }
 

@@ -20,7 +20,8 @@
 
 int		main(void)
 {
-	printf("%#10%");
+	int nb = 255;
+	printf("%-d", nb);
 	// ft_test(i, argv[1], argv[2], argv[3]);
 	return(0);
 }
