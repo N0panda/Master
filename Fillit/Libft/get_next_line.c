@@ -5,49 +5,128 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 17:56:25 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/12 12:42:36 by ythomas          ###   ########.fr       */
+/*   Created: 2018/11/19 13:12:46 by ythomas           #+#    #+#             */
+/*   Updated: 2018/12/03 15:57:40 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <limits.h>
+#include <unistd.h>
 #include "libft.h"
 
-char	*f(char *tb, int a)
+static t_chain		*ft_new_element(int fd)
 {
-	if (a == 1)
-		return (ft_strchr(tb, '\n'));
-	else
-		return (ft_strsub(tb, 0, (size_t)(f(tb, 1) - tb)));
+	t_chain		*newelem;
+	char		buf[BUFF_SIZE + 1];
+	int			ret;
+	char		*tmp;
+
+	if (!(newelem = (t_chain*)malloc(sizeof(t_chain))))
+		return (NULL);
+	if (!(newelem->file = (char*)malloc(sizeof(char))))
+		return (NULL);
+	newelem->file[0] = 0;
+	newelem->fd = fd;
+	newelem->index = 0;
+	newelem->endfile = 0;
+	newelem->next = NULL;
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	{
+		buf[ret] = '\0';
+		newelem->endfile = newelem->endfile + ret;
+		tmp = newelem->file;
+		newelem->file = ft_strjoin(newelem->file, buf);
+		free(tmp);
+	}
+	return (newelem);
 }
 
-int		get_next_line(int fd, char **line)
+static t_chain		*ft_search_elem(t_chain *element, int fd)
 {
-	static char		*tb[OPEN_MAX];
-	char			buf[BUFF_SIZE + 1];
-	char			*tmp;
-	int				lu;
+	if (element->fd != fd && element->next == NULL)
+		return (element->next = ft_new_element(fd));
+	if (element->fd != fd && element->next != NULL)
+		return (ft_search_elem(element->next, fd));
+	else
+		return (element);
+}
 
-	lu = 0;
-	if (!line || (read(fd, NULL, 0) < 0))
-		return (-1);
-	while ((!tb[fd] || !f(tb[fd], 1)) && (lu = (read(fd, buf, BUFF_SIZE))) > 0)
+static char			*ft_fill_line(char *line, t_chain *maillon)
+{
+	int		i;
+	int		v;
+	char	*tmp;
+
+	i = 0;
+	v = 0;
+	tmp = maillon->file + maillon->index;
+	while (maillon->file[maillon->index] != '\n' &&
+			maillon->index < maillon->endfile)
 	{
-		buf[lu] = '\0';
-		tmp = tb[fd] ? tb[fd] : NULL;
-		if (!(tb[fd] = tb[fd] ? ft_strjoin(tb[fd], buf) : ft_strdup(buf)))
-			return (-1);
-		tmp ? free(tmp) : 0;
+		maillon->index++;
+		i++;
 	}
-	if (!lu && (!tb[fd] || !tb[fd][0]))
-		return ((*line = ft_strnew(0)) ? 0 : -1);
-	if (!(*line = f(tb[fd], 1) ? f(tb[fd], 0) : ft_strdup(tb[fd])))
+	maillon->index++;
+	if (!(line = (char*)malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	while (v < i)
+	{
+		line[v] = tmp[v];
+		v++;
+	}
+	line[v] = '\0';
+	return (line);
+}
+
+static void			clean_element(t_chain **element, t_chain **maillon)
+{
+	t_chain *tmp;
+
+	tmp = *element;
+	if ((*element)->fd == (*maillon)->fd)
+	{
+		*element = (*maillon)->next;
+		free((*maillon)->file);
+		(*maillon)->file = NULL;
+		free(*maillon);
+		*maillon = NULL;
+	}
+	else
+	{
+		while ((*element)->next->fd != (*maillon)->fd)
+			*element = (*element)->next;
+		(*element)->next = (*maillon)->next;
+		free((*maillon)->file);
+		(*maillon)->file = NULL;
+		free(*maillon);
+		*maillon = NULL;
+		*element = tmp;
+	}
+}
+
+int					get_next_line(const int fd, char **line)
+{
+	static t_chain	*element = NULL;
+	t_chain			*maillon;
+	char			buf[BUFF_SIZE];
+
+	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
-	if (!(tmp = f(tb[fd], 1) ? ft_strdup(f(tb[fd], 1) + 1) : (char*)1))
-		return (-1);
-	tmp = tmp == (char*)1 ? NULL : tmp;
-	free(tb[fd]);
-	return ((tb[fd] = tmp) ? 1 : 1);
+	if (element == NULL)
+	{
+		if ((element = ft_new_element(fd)) == NULL)
+			return (-1);
+		maillon = element;
+	}
+	else
+		maillon = ft_search_elem(element, fd);
+	if (maillon->index < maillon->endfile)
+		*line = ft_fill_line(*line, maillon);
+	else
+	{
+		clean_element(&element, &maillon);
+		return (0);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 18:04:09 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/29 11:47:51 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/18 11:03:13 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,27 @@ t_tetri		*creat_tetri_maillon(char **file)
 	tetri->largeur = check_largeur(file);
 	tetri->x = x_origine(file);
 	tetri->y = y_origine(file);
-	tetri->used = 0;
 	tetri->px = 0;
 	tetri->py = 0;
 	tetri->next = NULL;
 	return (tetri);
 }
 
-t_tetri		*creat_list(char **file)
+void		free_file(char **file, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(file[i]);
+		i++;
+	}
+	free(file);
+	file = NULL;
+}
+
+t_tetri		*creat_list(char **file, int size)
 {
 	int			i;
 	t_tetri		*tetri;
@@ -106,5 +119,6 @@ t_tetri		*creat_list(char **file)
 		maillon = maillon->next;
 		i = i + 5;
 	}
+	free_file(file, size);
 	return (tetri);
 }

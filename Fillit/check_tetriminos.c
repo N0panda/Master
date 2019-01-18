@@ -6,11 +6,10 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 16:50:09 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/29 11:44:57 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/18 11:10:30 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include "fillit.h"
 
 static int			ft_checkfile(char **file, int size)
@@ -110,31 +109,29 @@ static int			ft_check_tetriminos(char **file, int size)
 	return (1);
 }
 
-char				**ft_creat_file(int fd)
+char				**ft_creat_file(int fd, int *i)
 {
 	char	*line;
 	char	**file;
-	int		i;
 
-	i = 0;
 	if (!(file = (char **)malloc(sizeof(char *) * 130)))
 		return (NULL);
 	while (get_next_line(fd, &line) > 0)
 	{
-		file[i] = ft_strdup(line);
-		i++;
+		file[(*i)] = ft_strdup(line);
+		(*i)++;
 		free(line);
 		line = NULL;
-		if (i > 129)
+		if ((*i) > 129)
 			return (NULL);
 	}
-	if (i < 4)
+	if (*i < 4)
 		return (NULL);
 	else
-		file[i] = 0;
-	if ((ft_checkfile(file, i)) == -1)
+		file[(*i)] = 0;
+	if ((ft_checkfile(file, *i)) == -1)
 		return (NULL);
-	if ((ft_check_tetriminos(file, i)) == -1)
+	if ((ft_check_tetriminos(file, *i)) == -1)
 		return (NULL);
 	return (file);
 }

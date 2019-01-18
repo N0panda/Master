@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 12:04:06 by ythomas           #+#    #+#             */
-/*   Updated: 2019/01/05 15:21:22 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/18 11:07:42 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	ft_try_it(t_tetri *m, char **board, int taille)
 		j = 0;
 		while (j < m->largeur && (j + m->px < taille))
 		{
-			if (m->tetriminos[m->y + i][m->x + j] == '#' &&
-				!(board[m->py + i][m->px + j] <= 'Z' &&
-				board[m->py + i][m->px + j] >= 'A'))
+			if (m->tetriminos[m->y + i][m->x + j] == '#'
+				&& !(board[m->py + i][m->px + j] <= 'Z'
+				&& board[m->py + i][m->px + j] >= 'A'))
 				w++;
 			j++;
 		}
@@ -51,9 +51,9 @@ static int	ft_do_it(t_tetri *m, char **board)
 		{
 			if (m->tetriminos[m->y + i][m->x + j] == '#')
 				board[m->py + i][m->px + j] = m->lettre;
-			if (m->tetriminos[m->y + i][m->x + j] == '.' &&
-				!(board[m->py + i][m->px + j] <= 'Z' &&
-				board[m->py + i][m->px + j] >= 'A'))
+			if (m->tetriminos[m->y + i][m->x + j] == '.'
+				&& !(board[m->py + i][m->px + j] <= 'Z'
+				&& board[m->py + i][m->px + j] >= 'A'))
 				board[m->py + i][m->px + j] = '.';
 			j++;
 		}

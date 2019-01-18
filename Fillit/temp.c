@@ -6,11 +6,11 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 16:28:58 by ythomas           #+#    #+#             */
-/*   Updated: 2018/12/29 11:53:13 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/18 11:09:51 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
 char	**creat_temp_file(char **file)
 {
@@ -63,5 +63,20 @@ void	ft_error(int type)
 	{
 		ft_putendl("error");
 		exit(EXIT_SUCCESS);
+	}
+}
+
+void	ft_free_list(t_tetri *tetri)
+{
+	t_tetri *maillon;
+	t_tetri *tmp;
+
+	maillon = tetri;
+	while (maillon != NULL)
+	{
+		free_file(maillon->tetriminos, 4);
+		tmp = maillon;
+		maillon = maillon->next;
+		free(tmp);
 	}
 }

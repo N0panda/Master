@@ -6,7 +6,7 @@
 #    By: ythomas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/29 13:00:34 by ythomas           #+#    #+#              #
-#    Updated: 2019/01/05 17:37:33 by ythomas          ###   ########.fr        #
+#    Updated: 2019/01/15 12:30:04 by ythomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ $(NAME) : $(LIB)
 
 $(LIB) :
 	make -C $(LIBDIR) all
-
 
 clean :
 	make -C $(LIBDIR) clean

@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:52:58 by ythomas           #+#    #+#             */
-/*   Updated: 2019/01/05 15:14:36 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/18 11:05:55 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ char		**creat_board(int taille)
 	i = 0;
 	if (!(board = (char**)malloc(sizeof(char*) * (taille + 1))))
 		return (NULL);
-	while (i < taille + 1)
-	{
-		board[i] = ft_strnew(taille);
-		i++;
-	}
+	while (i < taille)
+		if (!(board[i++] = ft_strnew(taille)))
+			return (NULL);
 	board[taille] = 0;
 	i = 0;
 	while (board[i])
@@ -96,11 +94,10 @@ int			ft_solve(char **board, t_tetri *maillon, int taille)
 	return (FAILURE);
 }
 
-char		**final_result(t_tetri *tetri)
+char		**final_result(t_tetri *tetri, int *size_b)
 {
 	t_tetri		*maillon;
 	char		**board;
-	int			taille;
 	int			nb;
 
 	nb = 0;
@@ -110,13 +107,13 @@ char		**final_result(t_tetri *tetri)
 		nb++;
 		maillon = maillon->next;
 	}
-	taille = ft_sqrt(4 * nb);
-	board = creat_board(taille);
-	while (ft_solve(board, tetri, taille) == FAILURE)
+	*size_b = ft_sqrt(4 * nb);
+	board = creat_board(*size_b);
+	while (ft_solve(board, tetri, *size_b) == FAILURE)
 	{
-		taille++;
-		free(board);
-		board = creat_board(taille);
+		(*size_b)++;
+		free_file(board, (*size_b));
+		board = creat_board(*size_b);
 	}
 	return (board);
 }
