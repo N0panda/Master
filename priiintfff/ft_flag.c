@@ -12,26 +12,6 @@
 
 #include "ft_printf.h"
 
-char	*ft_diu_flag_no_minus(char *str, char *b, int range, t_param *list)
-{
-	int i;
-
-	i = ft_strlen(str) - 1;
-	range--;
-	while (i >= 0)
-	{
-		b[range] = str[i];
-		i--;
-		range--;
-	}
-	if (list->flag->plus == 1)
-	{
-		range--;
-		b[range] = '+';
-	}
-	return (b);
-}
-
 char	*ft_range_diu_flags(char *str, char *b, int range, t_param *list)
 {
 	int		i;

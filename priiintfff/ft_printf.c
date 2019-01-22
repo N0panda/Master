@@ -12,30 +12,6 @@
 
 #include "ft_printf.h"
 
-static int		ft_check_format(char *format)
-{
-	int		i;
-
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int		ft_skip_param(char *f)
-{
-	int i;
-
-	i = 1;
-	while (f[i] != '\0' && f[i] != 'd' && f[i] != 'i' && f[i] != 'o' && f[i] != 'u' && f[i] != 'x' && f[i] != 'X' && f[i] != 'c' && f[i] != 's' && f[i] != 'p' && f[i] != 'f' && f[i] != '%')
-		i++;
-	return (i);
-}
-
 static t_param		*ft_create_maillon(char *format)
 {
 	t_param		*maillon;
@@ -127,7 +103,7 @@ int		ft_printf(const char *format, ...)
 
 int		main(void)
 {
-	char str[12] = "touslemonde";
+	char str[25] = "tous             lemonde";
 	char sti[12] = "cava";
 	int i = 42;
 

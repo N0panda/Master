@@ -12,20 +12,6 @@
 
 #include "ft_printf.h"
 
-int		ft_len_number(uint64_t nb, uint64_t val_base)
-{
-	int		len;
-
-	len = 0;
-	while (nb > val_base - 1)
-	{
-		nb = nb / val_base;
-		len++;
-	}
-	len++;
-	return (len);
-}
-
 char	*ft_copy_nb(char *str, t_param *list, char *base, int a)
 {
 	uint64_t val_base;

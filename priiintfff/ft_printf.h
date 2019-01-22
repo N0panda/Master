@@ -56,5 +56,15 @@ char			*ft_octal(t_param *list);
 char			*ft_hexa(t_param *list);
 int				ft_affiche_resultat(char *format, t_param *list);
 int				ft_skip_param(char *f);
+char			*ft_get_result_s(t_param *list);
+char			*ft_get_result_c(t_param *list);
+char			*ft_get_result_di(t_param *list);
+char			*ft_get_result_u(t_param *list);
+int				ft_len_number(uint64_t nb, uint64_t val_base);
+char			*ft_diu_flag_no_minus(char *str, char *b, int range, t_param *list);
+t_flag			*ft_inti_struct_flag(t_flag *flag);
+t_flag			*ft_exception_flag(t_flag *flag);
+int				ft_check_format(char *format);
+int				ft_skip_param(char *f);
 
 #endif

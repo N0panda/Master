@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char	*ft_input_str(char *format, t_param *list, char *str, int len)
+static char	*ft_input_str(char *format, t_param *list, char *str)
 {
 	int i;
 	int j;
@@ -31,16 +31,12 @@ static char	*ft_input_str(char *format, t_param *list, char *str, int len)
 				l++;
 				j++;
 			}
-			i = i + ft_skip_param(format + i) + 1;
+			i = i + ft_skip_param(format + i);
 			list = list->next;
 		}
 		else
-		{
-			str[l] = format[i];
-			l++;
-			i++;
-		}
-		// i++;
+			str[l++] = format[i];
+		i++;
 	}
 	return (str);
 }
@@ -69,7 +65,7 @@ int		ft_affiche_resultat(char *format, t_param *list)
 	}
 	if(!(str = ft_strnew(len)))
 		return (0);
-	ft_input_str(format, start, str, len);
+	ft_input_str(format, start, str);
 	write(1, str, len);
 	return (len);
 }
