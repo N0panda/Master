@@ -19,7 +19,7 @@ char	*ft_get_result_s(t_param *list)
 
 	i = 0;
 	str = (char *)list->variable;
-	if (ft_strlen(str) < list->range)
+	if ((int)ft_strlen(str) < list->range)
 	{
 		if (!(list->result = ft_strnew(list->range)))
 			return (NULL);
@@ -31,7 +31,7 @@ char	*ft_get_result_s(t_param *list)
 			i = 0;
 		}
 		else
-			while (i < (list->range - ft_strlen(str)))
+			while (i < (list->range - (int)ft_strlen(str)))
 				list->result[i++] = ' ';
 	}
 	else
@@ -67,44 +67,52 @@ char	*ft_get_result_c(t_param *list)
 	return (list->result);
 }
 
- char	*ft_get_result_d(t_param *list)
+ char	*ft_get_result_di(t_param *list)
  {
  	char *str;
 
- 	str = ft_itoa((int)list->variable);
+ 	str = ft_inttoa((int64_t)list->variable);
+ 	str = ft_flag_diu(list, str);
  	return (str);
  }
 
-// char	*ft_get_result_u(t_param *list)
-// {
-// 	;
-// }
+char	*ft_get_result_u(t_param *list)
+{
+	char	*str;
 
+	str = ft_utoa(list->variable);
+	str = ft_flag_diu(list, str);
+	return (str);
+}
 
-// char	*ft_get_result_i(t_param *list)
-// {
-// 	;
-// }
+char	*ft_get_result_p(t_param *list)
+{
+	char	*str;
 
-// char	*ft_get_result_p(t_param *list)
-// {
-// 	;
-// }
+	str = ft_pointeur(list);
+	return (str);
+}
 
-// char	*ft_get_result_xX(t_param *list)
-// {
-// 	;
-// }
+char	*ft_get_result_xX(t_param *list)
+{
+	char *str;
+
+	str = ft_hexa(list);
+	return (str);
+}
 
 // char	*ft_get_result_f(t_param *list)
 // {
 // 	;
 // }
 
-// char	*ft_get_result_o(t_param *list)
-// {
-// 	;
-// }
+ char	*ft_get_result_o(t_param *list)
+{
+	char *str;
+
+	str = ft_octal(list);
+	return (str);
+}
 
 t_param		*ft_get_result(t_param *list)
 {
@@ -117,20 +125,18 @@ t_param		*ft_get_result(t_param *list)
 			list->result = ft_get_result_s(list);
 		else if (list->conversion == 'c' || list->conversion == '%')
 		 	list->result = ft_get_result_c(list);
-		else if (list->conversion == 'd')
-		 	list->result = ft_get_result_d(list);
-		// else if (list->conversion == 'u')
-		// 	list->result = ft_get_result_u(list);
-		// else if (list->conversion == 'i')
-		// 	list->result = ft_get_result_i(list);
-		// else if (list->conversion == 'p')
-		// 	list->result = ft_get_result_p(list);
-		// else if (list->conversion == 'x' || list->conversion == 'X')
-		// 	list->result = ft_get_result_xX(list);
+		else if (list->conversion == 'd' || list->conversion == 'i')
+		 	list->result = ft_get_result_di(list);
+		else if (list->conversion == 'u')
+			list->result = ft_get_result_u(list);
+		else if (list->conversion == 'p')
+			list->result = ft_get_result_p(list);
+		else if (list->conversion == 'x' || list->conversion == 'X')
+		 	list->result = ft_get_result_xX(list);
 		// else if (list->conversion == 'f')
 		// 	list->result = ft_get_result_f(list);
-		// else if (list->conversion == 'o')
-		// 	list->result = ft_get_result_o(list);
+		else if (list->conversion == 'o')
+			list->result = ft_get_result_o(list);
 		list = list->next;
 	}
 	return (depart);

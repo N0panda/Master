@@ -26,7 +26,7 @@ static int		ft_check_format(char *format)
 	return (0);
 }
 
-static int		ft_skip_param(char *f)
+int		ft_skip_param(char *f)
 {
 	int i;
 
@@ -56,7 +56,6 @@ static t_param		*ft_create_maillon(char *format)
 static t_param		*ft_create_list(char *format)
 {
 	int		i;
-	char	*tmp;
 	t_param		*list;
 	t_param		*depart;
 
@@ -101,57 +100,39 @@ t_param		*ft_input_variable(t_param *list, va_list ap)
 	return (start);
 }
 
-
-void	ft_affiche_list(t_param *list)
-{
-	// printf("conv : %c ",list->conversion);
-	// printf("modi : %d ",list->modifier);
-	// printf("prec : %d ",list->precision);
-	//printf("rang : %d\n",list->range);
-	// printf("s : %d a : %d z : %d, m : %d, p : %d\n", list->flag->space, list->flag->ash, list->flag->zero, list->flag->minus, list->flag->plus);
-	if (list->conversion == 'i')
-		ft_putnbr((long int)(list->variable));	
-	if (list->conversion == 'd')
-		ft_putstr((list->result));
-	else if (list->conversion == 'c' || list->conversion == '%')
-		ft_putstr((list->result));
-	else if (list->conversion == 's')
-		ft_putstr((list->result));
-	if (list->next != NULL)
-		return (ft_affiche_list(list->next));
-}
-
 int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	char		*resultat;
 	t_param		*list;
+	int 		result;
 
+	result = 0;
 	va_start(ap, format);
 	if (ft_check_format((char *)format) == 1)
 	{
 		list = ft_create_list((char *)format);
 		list = ft_input_variable(list, ap);
 		list = ft_get_result(list);
-		ft_affiche_list(list);
-		// resultat = ft_affichage_result(list);
+		result = ft_affiche_resultat((char *)format, list);
 	}
 	else
-		ft_putstr(format);
+	{
+		result = ft_strlen(format);
+		write(1, format, result);
+	}
 	va_end(ap);
-
-	return 1;
-	// if (resultat == NULL)
-	// 	return (ft_strlen(format));
-	// return (ft_strlen(resultat));
+	//free liste;
+	return (result);
 }
 
 int		main(void)
 {
-	int i = 255;
+	char str[12] = "touslemonde";
+	char sti[12] = "cava";
+	int i = 42;
 
-	//printf("% d\n", i);
-	ft_printf("%d", i);
+	ft_printf("salut %s comment %s on est %d", str, sti, i);
+	//ft_printf("salut");
 	return 0;
 }
 

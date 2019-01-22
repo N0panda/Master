@@ -23,7 +23,7 @@ uint64_t		ft_get_var_csp(t_param *list, va_list ap)
 		return (list->variable = (uint64_t)(va_arg(ap, int)));
 	if (list->conversion == 's')
 		return (list->variable = (uint64_t)(va_arg(ap, char *)));
-	if (list->variable == 'p')
+	if (list->conversion == 'p')
 		return (list->variable = (uint64_t)(va_arg(ap, void *)));
 	return (0);
 }

@@ -45,6 +45,15 @@ t_flag	*ft_inti_struct_flag(t_flag *flag)
 	return (flag);
 }
 
+t_flag	*ft_exception_flag(t_flag *flag)
+{
+	if (flag->zero == 1 && flag->minus == 1)
+		flag->zero = 0;
+	if (flag->plus == 1 && flag->space == 1)
+		flag->space = 0;
+	return (flag);
+}
+
 t_flag	*ft_get_flag(char *f, int len)
 {
 	t_flag *flag;
@@ -54,7 +63,8 @@ t_flag	*ft_get_flag(char *f, int len)
 		return (NULL);
 	flag = ft_inti_struct_flag(flag);
 	i = 1;
-	while (i < len && (f[i] == '#' || f[i] == '-' || f[i] == '+' || f[i] == ' ' || f[i] == '0'))
+	while (i < len && (f[i] == '#' || f[i] == '-' || f[i] == '+' || f[i] == ' '
+		|| f[i] == '0'))
 	{
 		if (f[i] == '#')
 			flag->ash = 1;
@@ -68,8 +78,7 @@ t_flag	*ft_get_flag(char *f, int len)
 			flag->space = 1;
 		i++;
 	}
-	if (flag->zero == 1 && flag->minus == 1)
-		flag->zero = 0;
+	ft_exception_flag(flag);
 	return (flag);
 }
 

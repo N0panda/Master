@@ -48,5 +48,13 @@ uint64_t		ft_get_var_di(t_param *list, va_list ap);
 uint64_t		ft_get_var_uoxX(t_param *list, va_list ap);
 uint64_t		ft_get_var_float(t_param *list, va_list ap);
 t_param			*ft_get_result(t_param *list);
+char			*ft_inttoa(int64_t n);
+char			*ft_utoa(uint64_t nb);
+char			*ft_flag_diu(t_param *list, char *str);
+char			*ft_pointeur(t_param *list);
+char			*ft_octal(t_param *list);
+char			*ft_hexa(t_param *list);
+int				ft_affiche_resultat(char *format, t_param *list);
+int				ft_skip_param(char *f);
 
 #endif

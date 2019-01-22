@@ -20,8 +20,8 @@
 
 int		main(void)
 {
-	int nb = 255;
-	printf("%-d", nb);
+	int nb = 123456;
+	printf("%#10x", nb);
 	// ft_test(i, argv[1], argv[2], argv[3]);
 	return(0);
 }
