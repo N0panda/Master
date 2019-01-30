@@ -53,7 +53,7 @@ uint64_t		ft_get_var_uoxx(t_param *list, va_list ap)
 uint64_t		ft_get_var_float(t_param *list, va_list ap)
 {
 	if (list->modifier == 5)
-		return (list->variable = (uint64_t)(va_arg(ap, long double)));
+		return (list->varfloat = (va_arg(ap, long double)));
 	else
-		return (list->variable = (uint64_t)(va_arg(ap, double)));
+		return (list->varfloat = (long double)(va_arg(ap, double)));
 }

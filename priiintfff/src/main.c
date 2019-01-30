@@ -16,6 +16,6 @@
 
 int	main(void)
 {
-	ft_printf("%d %d", 10, 5);
+	ft_printf("%.6f", 212.125425);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:02:04 by ythomas           #+#    #+#             */
-/*   Updated: 2019/01/29 12:03:30 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/30 18:28:59 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	*ft_range_xxo(char *str, t_param *list, int a, char c)
 	else
 		return (str);
 	tmp = ft_copy_xxo(tmp, str, list, a);
-	free (str);
+	free(str);
 	return (tmp);
 }
 

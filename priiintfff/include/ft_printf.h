@@ -29,12 +29,13 @@ typedef struct  s_flag
 typedef struct			s_param
 {
 	char				*result;
-	uint64_t			variable;//ok
-	t_flag				*flag; //ok
-	int					range;  //.......OK
- 	int					precision;//float....OK
-	int					modifier; //..... OK
-	char				conversion;//int/char/char *.... OK
+	uint64_t			variable;
+	long double			varfloat;
+	t_flag				*flag;
+	int					range;
+ 	int					precision;
+	int					modifier;
+	char				conversion;
 	struct s_param		*next;
 }						t_param;
 
@@ -69,5 +70,6 @@ char			*ft_precision(char *str, t_param *list);
 char			*ft_range_xxo(char *str, t_param *list, int a, char c);
 char			*ft_bchar(char *tmp, int len, char c);
 void			ft_free_list(t_param *list);
+char			*ft_float(long double varfloat, t_param *list);
 
 #endif

@@ -43,10 +43,18 @@ char	*ft_get_result_xx(t_param *list)
 	return (str);
 }
 
-// char	*ft_get_result_f(t_param *list)
-// {
-// 	;
-// }
+char	*ft_get_result_f(t_param *list)
+{
+	char *str;
+
+	if (list->modifier == 5)
+		str = ft_float(list->varfloat, list);
+	else if (list->modifier == 3)
+		str = ft_float((double)list->varfloat, list);
+	else
+		str = ft_float((float)list->varfloat, list);
+	return (str);
+}
 
  char	*ft_get_result_o(t_param *list)
 {
@@ -83,8 +91,8 @@ t_param		*ft_get_result(t_param *list)
 			list->result = ft_get_result_p(list);
 		else if (list->conversion == 'x' || list->conversion == 'X')
 		 	list->result = ft_get_result_xx(list);
-		// else if (list->conversion == 'f')
-		// 	list->result = ft_get_result_f(list);
+		else if (list->conversion == 'f')
+		 	list->result = ft_get_result_f(list);
 		else if (list->conversion == 'o')
 			list->result = ft_get_result_o(list);
 		list = list->next;
