@@ -12,8 +12,6 @@
 
 #include "ft_printf.h"
 
-
-
 char	*ft_get_result_p(t_param *list)
 {
 	char	*str;
@@ -47,6 +45,11 @@ char	*ft_get_result_f(t_param *list)
 {
 	char *str;
 
+	if (list->varfloat < 0)
+	{
+		list->flag->plus = 0;
+		list->flag->space = 0;
+	}
 	if (list->modifier == 5)
 		str = ft_float(list->varfloat, list);
 	else if (list->modifier == 3)

@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 17:16:28 by ythomas           #+#    #+#             */
-/*   Updated: 2019/01/23 14:38:57 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/01/31 22:04:26 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int		ft_printf(const char *format, ...)
 	result = 0;
 	if (ft_check_format((char *)format) == 1)
 	{
+		if (ft_general_check((char *)format) == -1)
+			return (0);
 		list = ft_create_list((char *)format);
 		va_start(ap, format);
 		list = ft_input_variable(list, ap);

@@ -6,7 +6,7 @@
 #    By: ythomas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/22 17:31:24 by ythomas           #+#    #+#              #
-#    Updated: 2019/01/29 15:03:22 by ythomas          ###   ########.fr        #
+#    Updated: 2019/01/31 18:59:09 by ythomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 SRC = ft_aff_resultat.c ft_get.c ft_printf.c ft_toa.c ft_flag.c ft_get_type.c \
 	  ft_result_1.c ft_result_2.c tools.c ft_flag_2.c base.c ft_precision.c \
-	  ft_free.c \
+	  ft_free.c ft_float.c check_format.c \
 
 DIR_OBJ = obj/
 

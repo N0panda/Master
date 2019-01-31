@@ -71,5 +71,6 @@ char			*ft_range_xxo(char *str, t_param *list, int a, char c);
 char			*ft_bchar(char *tmp, int len, char c);
 void			ft_free_list(t_param *list);
 char			*ft_float(long double varfloat, t_param *list);
+int				ft_general_check(char *f);
 
 #endif
