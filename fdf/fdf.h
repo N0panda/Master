@@ -27,6 +27,10 @@ typedef struct 			s_mlx
 	int		nb;
 	void	*ptr;
 	void	*window;
+	int		screen_w;
+	int		screen_h;
+	int		rate_x;
+	int		rate_y;
 }						t_mlx;
 
 typedef struct 			s_coord
@@ -35,8 +39,6 @@ typedef struct 			s_coord
 	int		x2;
 	int		y1;
 	int		y2;
-	int		z1;
-	int		z2;
 }						t_coord;
 
 void					ft_exit(void);
