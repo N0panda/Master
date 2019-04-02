@@ -49,7 +49,7 @@ int				**ft_get_map(char **text, t_mlx *list)
 	int 	signe;
 
 	signe = 1;
-	if (!(map = (int **)malloc(sizeof(int) * (list->size + 1))))
+	if (!(map = (int **)malloc(sizeof(int *) * (list->size + 1))))
 		ft_exit();
 	i = 0;
 	while (i < list->size)

@@ -12,6 +12,11 @@
 
 #include "fdf.h"
 
+void		ft_key_exit(void)
+{
+	exit(EXIT_SUCCESS);
+}
+
 void		ft_exit(void)
 {
 	write(2, "Error\n", 6);
