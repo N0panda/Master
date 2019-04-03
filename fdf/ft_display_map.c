@@ -34,16 +34,11 @@ void		ft_init_list(t_mlx *mlx)
 	mlx->img_w = 1800;
 	mlx->img_h = 1200;
 	ft_get_rate(mlx);
-	// mlx->rate_x = ((mlx->img_w) / mlx->nb) / 1;
-	// mlx->rate_y = ((mlx->img_h) / mlx->size) / 1;
-	// mlx->creat = ft_creat_img;
-	// mlx->refresh = ft_refresh_img;
-	// mlx->push = ft_push_img;
 	mlx->zoom = 200;
 	mlx->t_zoom = 0;
 	mlx->slide_x = 0;
 	mlx->slide_y = 0;
-	mlx->window = mlx_new_window(mlx->ptr, mlx->screen_w, mlx->screen_h, "T");
+	mlx->window = mlx_new_window(mlx->ptr, mlx->screen_w, mlx->screen_h, "test");
 }
 
 void		ft_draw_line(t_mlx *mlx)
@@ -76,42 +71,50 @@ void		ft_draw_line(t_mlx *mlx)
 	}
 }
 
+void		ft_display_pix_suite(t_mlx *mlx)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < mlx->nb)
+	{
+		y = 0;
+		while (y < mlx->size - 1)
+		{
+			mlx->x1 = (int)((mlx->map_y[x][y] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y1 = (int)((mlx->map_x[x][y + 1] * (mlx->rate_y)) + mlx->slide_y);
+			mlx->x2 = (int)((mlx->map_y[x][y] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y2 = (int)((mlx->map_x[x][y] * (mlx->rate_y)) + mlx->slide_y);
+			ft_draw_line(mlx);
+			y++;
+		}
+		x++;
+	}
+}
+
 void        ft_display_pix(t_mlx *mlx)
 {
 	int x;
 	int y;
 
 	y = 0;
-	while (y < mlx->size - 1)
+	while (y < mlx->size)
 	{
 		x = 0;
-		while (x < mlx->nb - 1)
+		while (x < mlx->nb)
 		{
-			mlx->x1 = (x * (mlx->rate_x)) + mlx->slide_x;
-			mlx->y1 = (y * (mlx->rate_y)) + mlx->slide_y;
-			mlx->x2 = ((x + 1) * (mlx->rate_x)) + mlx->slide_x;
-			mlx->y2 = (y * (mlx->rate_y)) + mlx->slide_y;
-			printf("x1[%d] y1[%d] x2[%d] y2[%d]\n", mlx->x1, mlx->y1, mlx->x2, mlx->y2);
+			printf("%d\n", mlx->nb);
+			mlx->x1 = (int)((mlx->map_x[x][y] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y1 = (int)((mlx->map_y[x][y] * (mlx->rate_y)) + mlx->slide_y);
+			mlx->x2 = (int)((mlx->map_x[x][y + 1] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y2 = (int)((mlx->map_y[x][y] * (mlx->rate_y)) + mlx->slide_y);
 			ft_draw_line(mlx);
 			x++;
 		}
 		y++;
 	}
-	x = 0;
-	while (x < mlx->nb - 1)
-	{
-		y = 0;
-		while (y < mlx->size - 1)
-		{
-			mlx->x1 = (x * (mlx->rate_x)) + mlx->slide_x;
-			mlx->y1 = ((y + 1) * (mlx->rate_y)) + mlx->slide_y;
-			mlx->x2 = (x * (mlx->rate_x)) + mlx->slide_x;
-			mlx->y2 = (y * (mlx->rate_y)) + mlx->slide_y;
-			ft_draw_line(mlx);
-			y++;
-		}
-		x++;
-	}
+	ft_display_pix_suite(mlx);
 }
 
 void		ft_display_map(t_mlx *mlx)

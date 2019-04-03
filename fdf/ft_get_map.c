@@ -41,6 +41,25 @@ void			ft_multi_atoi(char *str, int *map, int *y, int *signe)
 	}
 }
 
+void 			ft_fill_map_tab(t_mlx *mlx)
+{
+	int i;
+	int y;
+
+	i = 0;
+	while (i < mlx->size)
+	{
+		y = 0;
+		while (y < mlx->nb)
+		{
+			mlx->map_x[i][y] = y;
+			mlx->map_y[i][y] = i;
+			y++;
+		}
+		i++;
+	}
+}
+
 int				**ft_get_map(char **text, t_mlx *list)
 {
 	int 	**map;
@@ -49,16 +68,21 @@ int				**ft_get_map(char **text, t_mlx *list)
 	int 	signe;
 
 	signe = 1;
-	if (!(map = (int **)malloc(sizeof(int *) * (list->size + 1))))
+	if (!(map = (int **)malloc(sizeof(int *) * (list->size + 1)))
+		|| !(list->map_x = (double **)malloc(sizeof(double *) * (list->size + 1)))
+		|| !(list->map_y = (double **)malloc(sizeof(double *) * (list->size + 1))))
 		ft_exit();
 	i = 0;
 	while (i < list->size)
 	{
 		y = 0;
-		if (!(map[i] = (int *)malloc(sizeof(int) * list->nb)))
+		if (!(map[i] = (int *)malloc(sizeof(int) * list->nb))
+			|| !(list->map_x[i] = (double *)malloc(sizeof(double) * (list->nb)))
+			|| !(list->map_y[i] = (double *)malloc(sizeof(double) * (list->nb))))
 			ft_exit();
 		ft_multi_atoi(text[i], map[i], &y, &signe);
 		i++;
 	}
+	ft_fill_map_tab(list);
 	return (map);
 }

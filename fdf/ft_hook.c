@@ -55,5 +55,4 @@ void	ft_zoom(int key, t_mlx *mlx)
 		mlx->t_zoom++;
 		ft_refresh_img(mlx);
 	}
-	printf("%d\n", mlx->zoom);
 }

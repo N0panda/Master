@@ -42,7 +42,7 @@ int						main(int argc, char **argv)
 	if((fd = open(argv[1], O_RDONLY)) == 0)
 		return (0);
 	list->map = ft_check_and_get(fd, list);
-	//int i = 0;int y = 0;while(i < list->size){y=0; while(y < list->nb){printf("[%d]", list->map[i][y]);y++;}i++;printf("\n");}
+	//int i = 0;int y = 0;while(i < list->size){y=0; while(y < list->nb){printf("[%f]", list->map_y[i][y]);y++;}i++;printf("\n");}
 	close(fd);
 	ft_display_map(list);
 	return (0);

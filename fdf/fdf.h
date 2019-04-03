@@ -24,6 +24,8 @@
 typedef struct 			s_mlx
 {
 	int		**map;
+	double	**map_x;
+	double	**map_y;
 	int		size;
 	int		nb;
 	void	*ptr;
@@ -40,10 +42,10 @@ typedef struct 			s_mlx
 	char	*img_str;
 	int		*bpp;
 	int		s_l;
-	int		x1;
-	int		x2;
-	int		y1;
-	int		y2;
+	double	x1;
+	double	x2;
+	double	y1;
+	double	y2;
 	int 	dx;
 	int 	dy;
 	int 	sx;
@@ -52,9 +54,11 @@ typedef struct 			s_mlx
 	int 	e2;
 	int		slide_x;
 	int		slide_y;
-	// void	(*creat)(struct s_mlx *);
-	// void	(*push)(struct s_mlx *);
-	// void	(*refresh)(struct s_mlx *);
+	// int		rota_x1;
+	// int		rota_x2;
+	// int		rota_y1;
+	// int		rota_y2;
+	// int		rota_z;
 
 }						t_mlx;
 
@@ -75,5 +79,6 @@ void					ft_slide(int key, t_mlx *mlx);
 void					ft_rotate_z(t_mlx *mlx);
 void					ft_rotate_x(t_mlx *mlx);
 void					ft_rotate_y(t_mlx *mlx);
+void					ft_draw_line(t_mlx *mlx);
 
 #endif

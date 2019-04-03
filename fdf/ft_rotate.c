@@ -20,7 +20,21 @@ void	ft_rotate_x(t_mlx *mlx)
 
 void	ft_rotate_y(t_mlx *mlx)
 {
-	(void)mlx;
+	int i;
+	int j;
+
+	i = 0;
+	while (i < mlx->size)
+	{
+		j = 0;
+		while (j < mlx->nb)
+		{
+			mlx->map_x[i][j] = mlx->map_x[i][j] * cos(0.5);
+			j++;
+		}
+		i++;
+	}
+	ft_refresh_img(mlx);
 	return ;
 }
 
