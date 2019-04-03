@@ -73,46 +73,45 @@ void		ft_draw_line(t_mlx *mlx)
 
 void		ft_display_pix_suite(t_mlx *mlx)
 {
-	int x;
-	int y;
+	int i;
+	int j;
 
-	x = 0;
-	while (x < mlx->nb)
+	i = 0;
+	while (i < mlx->size - 1)
 	{
-		y = 0;
-		while (y < mlx->size - 1)
+		j = 0;
+		while (j < mlx->nb)
 		{
-			mlx->x1 = (int)((mlx->map_y[x][y] * (mlx->rate_x)) + mlx->slide_x);
-			mlx->y1 = (int)((mlx->map_x[x][y + 1] * (mlx->rate_y)) + mlx->slide_y);
-			mlx->x2 = (int)((mlx->map_y[x][y] * (mlx->rate_x)) + mlx->slide_x);
-			mlx->y2 = (int)((mlx->map_x[x][y] * (mlx->rate_y)) + mlx->slide_y);
+			mlx->x1 = (int)((mlx->map_x[i][j] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y1 = (int)((mlx->map_y[i][j] * (mlx->rate_y)) + mlx->slide_y);
+			mlx->x2 = (int)((mlx->map_x[i + 1][j] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y2 = (int)((mlx->map_y[i + 1][j] * (mlx->rate_y)) + mlx->slide_y);
 			ft_draw_line(mlx);
-			y++;
+			j++;
 		}
-		x++;
+		i++;
 	}
 }
 
 void        ft_display_pix(t_mlx *mlx)
 {
-	int x;
-	int y;
+	int i;
+	int j;
 
-	y = 0;
-	while (y < mlx->size)
+	i = 0;
+	while (i < mlx->size)
 	{
-		x = 0;
-		while (x < mlx->nb)
+		j = 0;
+		while (j < mlx->nb - 1)
 		{
-			printf("%d\n", mlx->nb);
-			mlx->x1 = (int)((mlx->map_x[x][y] * (mlx->rate_x)) + mlx->slide_x);
-			mlx->y1 = (int)((mlx->map_y[x][y] * (mlx->rate_y)) + mlx->slide_y);
-			mlx->x2 = (int)((mlx->map_x[x][y + 1] * (mlx->rate_x)) + mlx->slide_x);
-			mlx->y2 = (int)((mlx->map_y[x][y] * (mlx->rate_y)) + mlx->slide_y);
+			mlx->x1 = (int)((mlx->map_x[i][j] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y1 = (int)((mlx->map_y[i][j] * (mlx->rate_y)) + mlx->slide_y);
+			mlx->x2 = (int)((mlx->map_x[i][j + 1] * (mlx->rate_x)) + mlx->slide_x);
+			mlx->y2 = (int)((mlx->map_y[i][j + 1] * (mlx->rate_y)) + mlx->slide_y);
 			ft_draw_line(mlx);
-			x++;
+			j++;
 		}
-		y++;
+		i++;
 	}
 	ft_display_pix_suite(mlx);
 }
