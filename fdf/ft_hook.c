@@ -21,11 +21,11 @@ int		ft_get_key(int key, t_mlx *mlx)
 	else if (key == 126 || key == 123 || key == 125 || key == 124)
 	 	ft_slide(key, mlx);
 	else if (key == 83 || key == 92)
-		ft_rotate_z(mlx);
+		ft_rotate_z(mlx, key);
 	else if (key == 86|| key == 88)
-		ft_rotate_y(mlx);
+		ft_rotate_y(mlx, key);
 	else if (key == 91 || key == 84)
-		ft_rotate_x(mlx);
+		ft_rotate_x(mlx, key);
 	return (0);
 }
 

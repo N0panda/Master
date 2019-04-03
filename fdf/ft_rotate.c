@@ -12,34 +12,44 @@
 
 #include "fdf.h"
 
-void	ft_rotate_x(t_mlx *mlx)
+void	ft_rotate_x(t_mlx *mlx, int key)
 {
 	(void)mlx;
+		(void)key;
 	return ;
 }
 
-void	ft_rotate_y(t_mlx *mlx)
+void	ft_rotate_y(t_mlx *mlx, int key)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < mlx->size)
+	if (key == 88)
 	{
-		j = 0;
-		while (j < mlx->nb)
+		while (i < mlx->size)
 		{
-			mlx->map_x[i][j] = mlx->map_x[i][j] * cos(0.5);
-			j++;
+			j = 0;
+			while (j < mlx->nb)
+			{
+				mlx->map_x[i][j] = mlx->map_x[i][j] * cos(/*mlx->rad / (180 / M_PI)*/0.1) + mlx->map[i][j] * sin(0.1);
+				mlx->map[i][j] = (-1 * mlx->map_x[i][j]) * sin(0.1) + mlx->map[i][j] * cos(0.1);
+				j++;
+			}
+			i++;
 		}
-		i++;
+	}
+	else if (key == 88)
+	{
+
 	}
 	ft_refresh_img(mlx);
 	return ;
 }
 
-void	ft_rotate_z(t_mlx *mlx)
+void	ft_rotate_z(t_mlx *mlx, int key)
 {
 	(void)mlx;
+	(void)key;
 	return ;
 }

@@ -38,6 +38,7 @@ void		ft_init_list(t_mlx *mlx)
 	mlx->t_zoom = 0;
 	mlx->slide_x = 0;
 	mlx->slide_y = 0;
+	mlx->rad = 15;
 	mlx->window = mlx_new_window(mlx->ptr, mlx->screen_w, mlx->screen_h, "test");
 }
 

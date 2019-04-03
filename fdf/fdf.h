@@ -46,6 +46,7 @@ typedef struct 			s_mlx
 	double	x2;
 	double	y1;
 	double	y2;
+	double	rad;
 	int 	dx;
 	int 	dy;
 	int 	sx;
@@ -76,9 +77,9 @@ void					ft_zoom(int key, t_mlx *mlx);
 void					ft_display_pix(t_mlx *mlx);
 void					ft_key_exit(void);
 void					ft_slide(int key, t_mlx *mlx);
-void					ft_rotate_z(t_mlx *mlx);
-void					ft_rotate_x(t_mlx *mlx);
-void					ft_rotate_y(t_mlx *mlx);
+void					ft_rotate_z(t_mlx *mlx, int key);
+void					ft_rotate_x(t_mlx *mlx, int key);
+void					ft_rotate_y(t_mlx *mlx, int key);
 void					ft_draw_line(t_mlx *mlx);
 
 #endif
