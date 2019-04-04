@@ -23,7 +23,7 @@
 
 typedef struct 			s_mlx
 {
-	int		**map;
+	double	**map;
 	double	**map_x;
 	double	**map_y;
 	int		size;
@@ -47,12 +47,12 @@ typedef struct 			s_mlx
 	double	y1;
 	double	y2;
 	double	rad;
-	int 	dx;
-	int 	dy;
-	int 	sx;
-	int 	sy;
-	int 	err;
-	int 	e2;
+	double	dx;
+	double 	dy;
+	double 	sx;
+	double	sy;
+	double	err;
+	double 	e2;
 	int		slide_x;
 	int		slide_y;
 	// int		rota_x1;
@@ -64,14 +64,14 @@ typedef struct 			s_mlx
 }						t_mlx;
 
 void					ft_exit(void);
-int						**ft_check_and_get(int fd, t_mlx *list);
+double					**ft_check_and_get(int fd, t_mlx *list);
 char					*ft_cut_white(char *str);
-int						**ft_get_map(char **text, t_mlx *list);
+double					**ft_get_map(char **text, t_mlx *list);
 void					ft_display_map(t_mlx *mlx);
 void					ft_push_img(t_mlx *mlx);
 void					ft_creat_img(t_mlx *mlx);
 void					ft_refresh_img(t_mlx *mlx);
-void					ft_set_pixel(t_mlx *mlx, int x, int y);
+void					ft_set_pixel(t_mlx *mlx, double x, double y);
 int						ft_get_key(int key, t_mlx *mlx);
 void					ft_zoom(int key, t_mlx *mlx);
 void					ft_display_pix(t_mlx *mlx);

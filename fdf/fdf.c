@@ -34,13 +34,13 @@ int						main(int argc, char **argv)
 	if (!(list = (t_mlx *)malloc(sizeof(t_mlx))))
 		ft_exit();
 	list->size = 0;
-	if((fd = open(argv[1], O_RDONLY)) == 0)
-		return (0);
+	if((fd = open(argv[1], O_RDONLY)) == -1)
+		ft_exit();
 	while (get_next_line(fd, &line) > 0)
 		list->size++;
 	close(fd);
-	if((fd = open(argv[1], O_RDONLY)) == 0)
-		return (0);
+	if((fd = open(argv[1], O_RDONLY)) == -1)
+		ft_exit();
 	list->map = ft_check_and_get(fd, list);
 	//int i = 0;int y = 0;while(i < list->size){y=0; while(y < list->nb){printf("[%f]", list->map_y[i][y]);y++;}i++;printf("\n");}
 	close(fd);

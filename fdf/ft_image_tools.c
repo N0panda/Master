@@ -25,7 +25,7 @@ void		ft_creat_img(t_mlx *mlx)
 	mlx->img_str = mlx_get_data_addr(mlx->img_ptr, &bpp, &s_l, &endian);
 }
 
-void		ft_set_pixel(t_mlx *mlx, int x, int y)
+void		ft_set_pixel(t_mlx *mlx, double x, double y)
 {
 	int px; // position dans l'image de x
 	int py; // position dans l'image de y
@@ -33,9 +33,9 @@ void		ft_set_pixel(t_mlx *mlx, int x, int y)
 	
 	if (x < 0 || x >= mlx->img_w || y < 0 || y >= mlx->img_h)
 		return ;
-	px = (4 * x);
-	py = (y * 4 * mlx->img_w);
-	result = px + py;
+	px = (4 * (int)x);
+	py = ((int)y * 4 * mlx->img_w);
+	result = (px + py);
 	mlx->img_str[result] = 0x66;
 	mlx->img_str[result+1] = 0x00;
 	mlx->img_str[result+2] = 0xcc;

@@ -12,10 +12,10 @@
 
 #include "fdf.h"
 
-void			ft_multi_atoi(char *str, int *map, int *y, int *signe)
+void			ft_multi_atoi(char *str, double *map, int *y, int *signe)
 {
 	int i;
-	long tmp;
+	double tmp;
 
 	i = 0;
 	while (str[i])
@@ -60,15 +60,15 @@ void 			ft_fill_map_tab(t_mlx *mlx)
 	}
 }
 
-int				**ft_get_map(char **text, t_mlx *list)
+double				**ft_get_map(char **text, t_mlx *list)
 {
-	int 	**map;
+	double 	**map;
 	int 	i;
 	int		y;
 	int 	signe;
 
 	signe = 1;
-	if (!(map = (int **)malloc(sizeof(int *) * (list->size + 1)))
+	if (!(map = (double **)malloc(sizeof(double *) * (list->size + 1)))
 		|| !(list->map_x = (double **)malloc(sizeof(double *) * (list->size + 1)))
 		|| !(list->map_y = (double **)malloc(sizeof(double *) * (list->size + 1))))
 		ft_exit();
@@ -76,7 +76,7 @@ int				**ft_get_map(char **text, t_mlx *list)
 	while (i < list->size)
 	{
 		y = 0;
-		if (!(map[i] = (int *)malloc(sizeof(int) * list->nb))
+		if (!(map[i] = (double *)malloc(sizeof(double) * list->nb))
 			|| !(list->map_x[i] = (double *)malloc(sizeof(double) * (list->nb)))
 			|| !(list->map_y[i] = (double *)malloc(sizeof(double) * (list->nb))))
 			ft_exit();

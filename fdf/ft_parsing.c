@@ -83,10 +83,10 @@ void				ft_get_text(int fd, t_mlx *list, char ***text)
 	}
 }
 
-int 					**ft_check_and_get(int fd, t_mlx *list)
+double				**ft_check_and_get(int fd, t_mlx *list)
 {
 	char	**text;
-	int 	**map;
+	double 	**map;
 
 	if (!(text = (char **)malloc(sizeof(char *) * list->size)))
 		ft_exit();

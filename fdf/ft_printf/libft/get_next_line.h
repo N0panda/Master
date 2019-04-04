@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pvalleci <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/25 12:56:01 by ythomas           #+#    #+#             */
-/*   Updated: 2019/03/25 12:56:04 by ythomas          ###   ########.fr       */
+/*   Created: 2019/01/11 16:37:59 by pvalleci          #+#    #+#             */
+/*   Updated: 2019/04/03 17:36:22 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 int				get_next_line(const int fd, char **line);
 #endif
