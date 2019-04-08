@@ -34,12 +34,99 @@ void		ft_init_list(t_mlx *mlx)
 	mlx->img_w = 1800;
 	mlx->img_h = 1200;
 	ft_get_rate(mlx);
+	mlx->color = 0xffffff;
+	mlx->red = ((unsigned char *)&(mlx->color))[2];
+	mlx->green = ((unsigned char *)&(mlx->color))[1];
+	mlx->blue = ((unsigned char *)&(mlx->color))[0];
 	mlx->zoom = 200;
 	mlx->t_zoom = 0;
 	mlx->slide_x = 0;
 	mlx->slide_y = 0;
-	mlx->rad = 15;
 	mlx->window = mlx_new_window(mlx->ptr, mlx->screen_w, mlx->screen_h, "test");
+}
+
+void		ft_draw_case1(t_mlx *mlx)
+{
+	while (1)
+		{
+			if (mlx->x1 > mlx->x2 || mlx->y1 > mlx->y2 || ((mlx->x1 == mlx->x2) && (mlx->y1 == mlx->y2)))
+				break ;
+			ft_set_pixel(mlx, mlx->x1, mlx->y1);
+			mlx->e2 = mlx->err;
+			if (mlx->e2 > - (mlx->dx))
+			{
+				mlx->err = mlx->err - mlx->dy;
+				mlx->x1 = mlx->x1 + mlx->sx;
+			}
+			if (mlx->e2 < mlx->dy)
+			{
+				mlx->err = mlx->err + mlx->dx;
+				mlx->y1 = mlx->y1 + mlx->sy;
+			}
+		}
+}
+
+void		ft_draw_case2(t_mlx *mlx)
+{
+	while (1)
+	{
+		if (mlx->x1 < mlx->x2 || mlx->y1 > mlx->y2 || ((mlx->x1 == mlx->x2) && (mlx->y1 == mlx->y2)))
+			break ;
+		ft_set_pixel(mlx, mlx->x1, mlx->y1);
+		mlx->e2 = mlx->err;
+		if (mlx->e2 > - (mlx->dx))
+		{
+			mlx->err = mlx->err - mlx->dy;
+			mlx->x1 = mlx->x1 + mlx->sx;
+		}
+		if (mlx->e2 < mlx->dy)
+		{
+			mlx->err = mlx->err + mlx->dx;
+			mlx->y1 = mlx->y1 + mlx->sy;
+		}
+	}
+}
+
+void		ft_draw_case3(t_mlx *mlx)
+{
+	while (1)
+	{
+		if (mlx->x1 > mlx->x2 || mlx->y1 < mlx->y2 || ((mlx->x1 == mlx->x2) && (mlx->y1 == mlx->y2)))
+			break ;
+		ft_set_pixel(mlx, mlx->x1, mlx->y1);
+		mlx->e2 = mlx->err;
+		if (mlx->e2 > - (mlx->dx))
+		{
+			mlx->err = mlx->err - mlx->dy;
+			mlx->x1 = mlx->x1 + mlx->sx;
+		}
+		if (mlx->e2 < mlx->dy)
+		{
+			mlx->err = mlx->err + mlx->dx;
+			mlx->y1 = mlx->y1 + mlx->sy;
+		}
+	}
+}
+
+void		ft_draw_case4(t_mlx *mlx)
+{
+	while (1)
+	{
+		if (mlx->x1 < mlx->x2 || mlx->y1 < mlx->y2 || ((mlx->x1 == mlx->x2) && (mlx->y1 == mlx->y2)))
+			break ;
+		ft_set_pixel(mlx, mlx->x1, mlx->y1);
+		mlx->e2 = mlx->err;
+		if (mlx->e2 > - (mlx->dx))
+		{
+			mlx->err = mlx->err - mlx->dy;
+			mlx->x1 = mlx->x1 + mlx->sx;
+		}
+		if (mlx->e2 < mlx->dy)
+		{
+			mlx->err = mlx->err + mlx->dx;
+			mlx->y1 = mlx->y1 + mlx->sy;
+		}
+	}
 }
 
 void		ft_draw_line(t_mlx *mlx)
@@ -54,85 +141,13 @@ void		ft_draw_line(t_mlx *mlx)
 	mlx->sy = mlx->y1 < mlx->y2 ? 1 : -1;
 	mlx->err = (mlx->dx > mlx->dy ? mlx->dx : (-mlx->dy)) / 2;
 	if (mlx->x2 - mlx->x1 >= 0 && mlx->y2 - mlx->y1 >= 0)
-	{
-		while (1)
-		{
-			if (mlx->x1 > mlx->x2 || mlx->y1 > mlx->y2)
-				break ;
-			ft_set_pixel(mlx, mlx->x1, mlx->y1);
-			mlx->e2 = mlx->err;
-			if (mlx->e2 > - (mlx->dx))
-			{
-				mlx->err = mlx->err - mlx->dy;
-				mlx->x1 = mlx->x1 + mlx->sx;
-			}
-			if (mlx->e2 < mlx->dy)
-			{
-				mlx->err = mlx->err + mlx->dx;
-				mlx->y1 = mlx->y1 + mlx->sy;
-			}
-		}
-	}
+		ft_draw_case1(mlx);
 	else if (mlx->x2 - mlx->x1 < 0 && mlx->y2 - mlx->y1 >= 0)
-	{
-		while (1)
-		{
-			if (mlx->x1 < mlx->x2 || mlx->y1 > mlx->y2)
-				break ;
-			ft_set_pixel(mlx, mlx->x1, mlx->y1);
-			mlx->e2 = mlx->err;
-			if (mlx->e2 > - (mlx->dx))
-			{
-				mlx->err = mlx->err - mlx->dy;
-				mlx->x1 = mlx->x1 + mlx->sx;
-			}
-			if (mlx->e2 < mlx->dy)
-			{
-				mlx->err = mlx->err + mlx->dx;
-				mlx->y1 = mlx->y1 + mlx->sy;
-			}
-		}
-	}
+		ft_draw_case2(mlx);
 	else if (mlx->x2 - mlx->x1 >= 0 && mlx->y2 - mlx->y1 < 0)
-	{
-		while (1)
-		{
-			if (mlx->x1 > mlx->x2 || mlx->y1 < mlx->y2)
-				break ;
-			ft_set_pixel(mlx, mlx->x1, mlx->y1);
-			mlx->e2 = mlx->err;
-			if (mlx->e2 > - (mlx->dx))
-			{
-				mlx->err = mlx->err - mlx->dy;
-				mlx->x1 = mlx->x1 + mlx->sx;
-			}
-			if (mlx->e2 < mlx->dy)
-			{
-				mlx->err = mlx->err + mlx->dx;
-				mlx->y1 = mlx->y1 + mlx->sy;
-			}
-		}
-	}
+		ft_draw_case3(mlx);
 	else
-	{
-		while (1)
-		{
-			if (mlx->x1 < mlx->x2 || mlx->y1 < mlx->y2)
-				break ;
-			ft_set_pixel(mlx, mlx->x1, mlx->y1);
-			mlx->e2 = mlx->err;
-			if (mlx->e2 > - (mlx->dx))
-			{
-				mlx->err = mlx->err - mlx->dy;
-				mlx->x1 = mlx->x1 + mlx->sx;
-			}
-			if (mlx->e2 < mlx->dy)
-			{
-				mlx->err = mlx->err + mlx->dx;
-				mlx->y1 = mlx->y1 + mlx->sy;
-			}
-		}
-	}
+		ft_draw_case4(mlx);
 }
 
 void		ft_display_pix_suite(t_mlx *mlx)
@@ -187,6 +202,6 @@ void		ft_display_map(t_mlx *mlx)
 	ft_display_pix(mlx);
 	//ft_set_pixel(mlx, 0, 0);
 	ft_push_img(mlx);
-	mlx_key_hook(mlx->window, ft_get_key, mlx);
+	mlx_hook(mlx->window, 2, (1L<<0), ft_get_key, mlx);
 	mlx_loop(mlx->ptr);
 }

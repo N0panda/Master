@@ -23,6 +23,12 @@ void		ft_exit(void)
 	exit(EXIT_FAILURE);
 }
 
+void		ft_exit_color(void)
+{
+	write(2, "Error Color\n", 12);
+	exit(EXIT_FAILURE);
+}
+
 int						main(int argc, char **argv)
 {
 	int				fd;
@@ -42,8 +48,9 @@ int						main(int argc, char **argv)
 	if((fd = open(argv[1], O_RDONLY)) == -1)
 		ft_exit();
 	list->map = ft_check_and_get(fd, list);
-	//int i = 0;int y = 0;while(i < list->size){y=0; while(y < list->nb){printf("[%f]", list->map_y[i][y]);y++;}i++;printf("\n");}
-	close(fd);
+		close(fd);
+	ft_get_map_tmp(list);
+	ft_copy_data_tmp(list);
 	ft_display_map(list);
 	return (0);
 }

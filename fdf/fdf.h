@@ -26,6 +26,9 @@ typedef struct 			s_mlx
 	double	**map;
 	double	**map_x;
 	double	**map_y;
+	double	**map_tmp;
+	double	**map_xtmp;
+	double	**map_ytmp;
 	int		size;
 	int		nb;
 	void	*ptr;
@@ -55,11 +58,10 @@ typedef struct 			s_mlx
 	double 	e2;
 	int		slide_x;
 	int		slide_y;
-	// int		rota_x1;
-	// int		rota_x2;
-	// int		rota_y1;
-	// int		rota_y2;
-	// int		rota_z;
+	int		color;
+	unsigned char red;
+	unsigned char green;
+	unsigned char blue;
 
 }						t_mlx;
 
@@ -81,5 +83,19 @@ void					ft_rotate_z(t_mlx *mlx, int key);
 void					ft_rotate_x(t_mlx *mlx, int key);
 void					ft_rotate_y(t_mlx *mlx, int key);
 void					ft_draw_line(t_mlx *mlx);
+void					ft_rotate_bottom(t_mlx *mlx);
+void					ft_rotate_top(t_mlx *mlx);
+void					ft_rotate_up(t_mlx *mlx);
+void					ft_rotate_down(t_mlx *mlx);
+void					ft_height(t_mlx *mlx, int key);
+// void					ft_height_less(t_mlx *mlx);
+// void					ft_height_more(t_mlx *mlx);
+void					ft_draw_line(t_mlx *mlx);
+void					ft_color_top(t_mlx *mlx, int key);
+void					ft_copy_data_tmp(t_mlx *mlx);
+void					ft_get_map_tmp(t_mlx *mlx);
+void					ft_height_plus(t_mlx *mlx);
+void					ft_height_less(t_mlx *mlx);
+void					ft_restart(t_mlx *mlx);
 
 #endif

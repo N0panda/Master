@@ -36,13 +36,9 @@ void		ft_set_pixel(t_mlx *mlx, double x, double y)
 	px = (4 * (int)x);
 	py = ((int)y * 4 * mlx->img_w);
 	result = (px + py);
-	mlx->img_str[result] = 0x66;
-	mlx->img_str[result+1] = 0x00;
-	mlx->img_str[result+2] = 0xcc;
-	// mlx->img_str[result] = 0xff;
-	// mlx->img_str[result+1] = 0xff;
-	// mlx->img_str[result+2] = 0xff;
-
+	mlx->img_str[result] = mlx->red;
+	mlx->img_str[result+1] = mlx->green;
+	mlx->img_str[result+2] = mlx->blue;
 }
 
 void		ft_push_img(t_mlx *mlx)

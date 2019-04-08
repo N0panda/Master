@@ -12,6 +12,46 @@
 
 #include "fdf.h"
 
+void			ft_get_map_tmp(t_mlx *mlx)
+{
+	int i;
+
+	i = 0;
+	if (!(mlx->map_tmp = (double **)malloc(sizeof(double *) * (mlx->size + 1)))
+		|| !(mlx->map_xtmp = (double **)malloc(sizeof(double *) * (mlx->size + 1)))
+		|| !(mlx->map_ytmp = (double **)malloc(sizeof(double *) * (mlx->size + 1))))
+		ft_exit();
+	while (i < mlx->size)
+	{
+		if (!(mlx->map_tmp[i] = (double *)malloc(sizeof(double) * mlx->nb))
+			|| !(mlx->map_xtmp[i] = (double *)malloc(sizeof(double) * (mlx->nb)))
+			|| !(mlx->map_ytmp[i] = (double *)malloc(sizeof(double) * (mlx->nb))))
+			ft_exit();
+		i++;
+	}
+}
+
+void			ft_copy_data_tmp(t_mlx *mlx)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < mlx->size)
+	{
+		j = 0;
+		while (j < mlx->nb)
+		{
+			mlx->map_tmp[i][j] = mlx->map[i][j];
+			mlx->map_xtmp[i][j] = mlx->map_x[i][j];
+			mlx->map_ytmp[i][j] = mlx->map_y[i][j];
+			j++;
+		}
+		i++;
+	}
+
+}
+
 void			ft_multi_atoi(char *str, double *map, int *y, int *signe)
 {
 	int i;
