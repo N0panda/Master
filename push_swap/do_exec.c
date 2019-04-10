@@ -74,8 +74,6 @@ int		ft_do_exec(t_exec *list, t_size *size)
 	int i;
 
 	i = 0;
-	size->nba = size->a;
-	size->nbb = 0;
 	while (i < size->a)
 		size->pb[i++] = 0;
 	exec_part(list, size);

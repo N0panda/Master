@@ -23,19 +23,18 @@ int 	ft_get_indicator(t_size *size)
 	alpha = 0;
 	while (i > 0)
 	{
-		if (size->pa[i] > size->pa[i - 1] && signe == 1)
+		if (size->pa[i] < size->pa[i - 1] && signe == 1)
 		{
 			signe = 0;
 			alpha++;
 		}
-		else if (size->pa[i] < size->pa[i - 1] && signe == 0)
+		else if (size->pa[i] > size->pa[i - 1] && signe == 0)
 		{
 			signe = 1;
 			alpha++;
 		}
 		i--;
 	}
-	printf("nombre alpha ==> [%d]\n", alpha);
 	return (alpha);
 }
 
@@ -49,10 +48,12 @@ int		ft_timetosort(t_size *size)
 		return (SUCCESS);
 	while (i < size->a)
 		size->pb[i++] = 0;
-	ft_quicksort(size, 0, size->a - 1);
+//	if (size->a <= 10)
+	ft_simple_sort(size);
+//	else if (size->a > 10) 
+//		ft_quicksort(size, 0, size->a - 1);
 	i = 0;
-	while (i < size->a)
-		printf("##%d\n", size->pa[i++]);
+
 	return (SUCCESS);
 }
 

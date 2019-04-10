@@ -119,6 +119,8 @@ int		*ft_fill_pile_a(int ac, char **av, t_size *size)
 	i = 1;
 	y = 0;
 	size->a = ft_get_pile_size(ac, av);
+	size->nba = size->a;
+	size->nbb = 0;
 	if (!(size->pa = (int *)malloc(sizeof (int) * (size->a))))
 		ft_exit();
 	while (i < ac)

@@ -12,8 +12,15 @@
 
 #include "push_swap.h"
 
+int			ft_abs(int nb)
+{
+	if (nb < 0)
+		nb *= - 1;
+	return (nb);
+}
+
 void		ft_exit(void)
 {
 	write(2, "Error\n", 6);
-	exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }

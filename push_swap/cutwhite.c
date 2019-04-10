@@ -61,7 +61,6 @@ char	*ft_cut_white(char *str)
 	len = ft_count_char(str);
 	if (!(tmp = (char *)malloc(sizeof(char) * (len + 1))))
 		ft_exit();
-	tmp[len] = '\0';
 	i = 0;
 	y = 0;
 	while (str[i])
@@ -74,5 +73,6 @@ char	*ft_cut_white(char *str)
 			tmp[y++] = str[i];
 		i++;
 	}
+	tmp[y] = '\0';
 	return (tmp);
 }
