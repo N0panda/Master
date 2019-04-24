@@ -15,7 +15,7 @@
 
 # define ERROR 0
 # define SUCCESS 1
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 
 typedef struct					s_exec
@@ -48,7 +48,7 @@ int							check_format_a(int ac, char **av);
 int							*ft_fill_pile_a(int ac, char **av, t_size *size);
 char						**ft_strsplitwp(char *s);
 char 						*ft_cut_white(char *str);
-t_exec						*ft_get_exec(void);
+t_exec						*ft_get_exec(int *nb);
 void						ft_exit(void);
 int							ft_do_exec(t_exec *list, t_size *size);
 int							ft_exec_sa(t_size *size);

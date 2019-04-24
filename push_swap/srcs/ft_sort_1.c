@@ -283,17 +283,17 @@ void		ft_quicksort(t_size *size, int start, int nb_push, int choix)
 void		ft_simple_sort(t_size *size)
 {
 	ft_quicksort(size, 0, size->nba, 0);
-	printf("----- PILE A -------\n");
-	int i = 0;
-	while (i < size->a)
-		printf("%d\n", size->pa[i++]);
-	printf("\n");
-	printf("----- PILE B -------\n");
-		i = 0;
-	while (i < size->nbb)
-		printf("%d\n", size->pb[i++]);
-	if (ft_a_is_sorted(size) == 1)
-		printf("OK\n");
-	else
-		printf("KO\n");
+	// printf("----- PILE A -------\n");
+	// int i = 0;
+	// while (i < size->a)
+	// 	printf("%d\n", size->pa[i++]);
+	// printf("\n");
+	// printf("----- PILE B -------\n");
+	// 	i = 0;
+	// while (i < size->nbb)
+	// 	printf("%d\n", size->pb[i++]);
+	// if (ft_a_is_sorted(size) == 1)
+	// 	printf("OK\n");
+	// else
+	// 	printf("KO\n");
 }

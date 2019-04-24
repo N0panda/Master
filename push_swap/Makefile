@@ -32,37 +32,45 @@ SRC = check_format.c do_exec.c ft_checker.c ft_exec_rrr.c ft_exec_sp.c \
 ft_fill_pile_a.c ft_free_exit.c get_exec.c cutwhite.c
 
 SRCX = check_format.c ft_exec_rrr2.c ft_exec_sp2.c ft_fill_pile_a.c \
-ft_free_exit.c ft_fakesort.c ft_sort_1.c ft_push_swap.c
+ft_free_exit.c ft_fakesort.c ft_sort_1.c ft_push_swap.c cutwhite.c
 
 SRC_DIR = srcs/
 
-INC = include/
+INC = include/push_swap.h
 
-all: $(NAMEX) $(NAME)
+INC_DIR = include/
+
+RED = \033[91m
+BL = \033[0m
+
+all: $(NAME) $(NAMEX)
 
 $(NAME): $(LIB) $(OBJ)
-	$(CC) $(FLAG) -o $(NAME) $(OBJ) $(LIB)
+	@$(CC) $(FLAG) -o $(NAME) $(OBJ) $(LIB)
+	@echo "          $(RED)< Checker Done ! >$(BL)           "
 
 $(NAMEX): $(OBJX)
-	$(CC) $(FLAG) -o $(NAMEX) $(OBJX) $(LIB)
+	@$(CC) $(FLAG) -o $(NAMEX) $(OBJX) $(LIB)
+	@echo "          $(RED)< Push_swap Done ! >$(BL)           "
 
 $(LIB):
-	make -C $(LIB_DIR)
+	@make -C $(LIB_DIR)
 
-%.o: $(SRC_DIR).c $(INC)
-	$(CC) $(FLAG) -c $< -o $@ -I$(INC_PATH) -I$(LIB_INC)
+%.o: $(SRC_DIR)%.c $(INC)
+	@$(CC) $(FLAG) -c $< -o $@ -I$(INC_DIR) -I$(LIBINC)
 
 clean:
-	rm -rf $(OBJ)
-	rm -rf $(OBJX)
-	echo "          $(RED)< Clean Done >$(BL)           "
+	@rm -rf $(OBJ)
+	@rm -rf $(OBJX)
+	@echo "          $(RED)< Clean Done >$(BL)           "
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf $(NAMEX)
-	echo "          $(RED)< Programme Fdf Deleted >$(BL)"
+	@rm -rf $(NAME)
+	@rm -rf $(NAMEX)
+	@echo "          $(RED)< Programme Checker et Push_swap Deleted >$(BL)"
 
 re: fclean all
 
 lib:
-	make re -C $(LIB_PATH)
+	@make re -C $(LIB_DIR)
+	@echo "          $(RED)< Libft Remake Done ! >$(BL)           "

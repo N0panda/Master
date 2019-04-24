@@ -37,7 +37,7 @@ int		ft_check_exec(char *s)
 	return (ERROR);
 }
 
-t_exec	*ft_creat_maillon(char *line)
+t_exec	*ft_creat_maillon(char *line, int *nb)
 {
 	t_exec *tmp;
 
@@ -45,10 +45,11 @@ t_exec	*ft_creat_maillon(char *line)
 		return (ERROR);
 	tmp->param = ft_strdup(line);
 	tmp->next = NULL;
+	(*nb)++;
 	return (tmp);
 }
 
-t_exec	*ft_get_exec(void)
+t_exec	*ft_get_exec(int *nb)
 {
 	t_exec		*maillon;
 	t_exec		*depart;
@@ -61,13 +62,13 @@ t_exec	*ft_get_exec(void)
 		if (ft_check_exec(line) == ERROR)
 			ft_exit();
 		if (depart == NULL)
-			depart = ft_creat_maillon(line);
+			depart = ft_creat_maillon(line, nb);
 		else
 		{
 			maillon = depart;
 			while (maillon->next != NULL)
 				maillon = maillon->next;
-			maillon->next = ft_creat_maillon(line);
+			maillon->next = ft_creat_maillon(line, nb);
 		}
 	}
 	return (depart);
