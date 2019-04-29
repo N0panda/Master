@@ -39,29 +39,29 @@ int		ft_exec_sb(t_size *size)
 int		ft_exec_pa(t_size *size)
 {
 	int tab[size->a];
-	int tabb[size->nbb - 1];
+	int tabb[size->nbb];
 	int i;
 	int y;
+
 	if (size->nbb == 0)
 		return (0);
 	(size->nbb)--;
 	(size->nba++);
-
 	i = 0;
 	y = 1;
-	tabb[0] = size->pb[0];
-	while (i < size->a)
-		tabb[y++] = size->pa[i++];
+	tab[0] = size->pb[0];
+	while (y < size->nba)
+		tab[y++] = size->pa[i++];
 	i = -1;
 	while (++i < size->a)
-		size->pa[i] = tabb[i];
+		size->pa[i] = tab[i];
 	i = 0;
 	y = 1;
 	while (i < size->nbb)
-		tab[i++] = size->pb[y++];
+		tabb[i++] = size->pb[y++];
 	i = -1;
 	while (++i < size->nbb)
-		size->pb[i] = tab[i];
+		size->pb[i] = tabb[i];
 	return (1);
 }
 
@@ -71,23 +71,22 @@ int		ft_exec_pb(t_size *size)
 	int tabb[size->nbb + 1];
 	int i;
 	int y;
+
 	if (size->nba == 0)
 		return (0);
-
 	(size->nbb)++;
 	(size->nba--);
-
 	i = 0;
 	y = 1;
 	tabb[0] = size->pa[0];
-	while (i < size->nbb)
+	while (y < size->nbb)
 		tabb[y++] = size->pb[i++];
 	i = -1;
 	while (++i < size->nbb)
 		size->pb[i] = tabb[i];
 	i = 0;
 	y = 1;
-	while (i < size->a)
+	while (y < size->a)
 		tab[i++] = size->pa[y++];
 	i = -1;
 	while (++i < size->a)

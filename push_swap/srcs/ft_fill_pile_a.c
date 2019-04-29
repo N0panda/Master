@@ -6,13 +6,13 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 20:29:06 by ythomas           #+#    #+#             */
-/*   Updated: 2019/03/04 20:29:07 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/04/26 18:17:54 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_same_num(t_size *size)
+int			ft_same_num(t_size *size)
 {
 	int i;
 	int y;
@@ -36,13 +36,11 @@ int		ft_same_num(t_size *size)
 	return (SUCCESS);
 }
 
-void	ft_multi_atoi(char *str, t_size *size, int *position)
+void		ft_multi_atoi(char *str, t_size *size, int *position, int i)
 {
-	int i;
-	int signe;
-	long tmp;
+	int		signe;
+	long	tmp;
 
-	i = 0;
 	while (str[i])
 	{
 		tmp = 0;
@@ -66,7 +64,7 @@ void	ft_multi_atoi(char *str, t_size *size, int *position)
 	}
 }
 
-int		ft_get_pile_size(int ac, char **str)
+int			ft_get_pile_size(int ac, char **str)
 {
 	int i;
 	int y;
@@ -93,7 +91,7 @@ int		ft_get_pile_size(int ac, char **str)
 	return (size);
 }
 
-int		*ft_rev_tab(t_size *size, int len)
+int			*ft_rev_tab(t_size *size, int len)
 {
 	int i;
 	int tmp;
@@ -111,7 +109,7 @@ int		*ft_rev_tab(t_size *size, int len)
 	return (size->pa);
 }
 
-int		*ft_fill_pile_a(int ac, char **av, t_size *size)
+int			*ft_fill_pile_a(int ac, char **av, t_size *size)
 {
 	int i;
 	int y;
@@ -121,23 +119,14 @@ int		*ft_fill_pile_a(int ac, char **av, t_size *size)
 	size->a = ft_get_pile_size(ac, av);
 	size->nba = size->a;
 	size->nbb = 0;
-	if (!(size->pa = (int *)malloc(sizeof (int) * (size->a))))
+	size->elem = NULL;
+	if (!(size->pa = (int *)malloc(sizeof(int) * (size->a))))
 		ft_exit();
 	while (i < ac)
 	{
 		av[i] = ft_cut_white(av[i]);
-		ft_multi_atoi(av[i], size, &y);
+		ft_multi_atoi(av[i], size, &y, 0);
 		i++;
 	}
 	return (size->pa);
 }
-
-
-
-
-
-
-
-
-
-

@@ -6,13 +6,13 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 18:39:56 by ythomas           #+#    #+#             */
-/*   Updated: 2019/04/08 18:39:59 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/04/29 13:11:12 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char		*ft_input_line(char **line, char *tab)
+static char			*ft_input_line(char **line, char *tab)
 {
 	int				i;
 	char			*tmp;
@@ -39,7 +39,7 @@ static char		*ft_input_line(char **line, char *tab)
 	return (tab);
 }
 
-int			get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
 	static char		*tb[OPEN_MAX];
 	int				lu;

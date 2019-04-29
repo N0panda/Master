@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
 #include "push_swap.h"
 
-void				ft_swap(int *a, int *b)
+void			ft_swap(int *a, int *b)
 {
 	int tmp;
 
@@ -49,9 +46,8 @@ void			ft_quicksorttwo(int *tab, int start, int end)
 	int	pivot;
 
 	if (start >= end)
-		return;
+		return ;
 	pivot = ft_partitiontwo(&tab, start, end);
 	ft_quicksorttwo(tab, start, pivot - 1);
 	ft_quicksorttwo(tab, pivot + 1, end);
 }
-	

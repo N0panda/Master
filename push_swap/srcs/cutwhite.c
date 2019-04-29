@@ -6,13 +6,13 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 13:29:33 by ythomas           #+#    #+#             */
-/*   Updated: 2019/03/08 13:29:35 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/04/26 18:11:42 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_count_char(char *str)
+int			ft_count_char(char *str)
 {
 	int i;
 	int y;
@@ -33,7 +33,7 @@ int		ft_count_char(char *str)
 	return (y);
 }
 
-int		ft_get_index(char *str)
+int			ft_get_index(char *str)
 {
 	int i;
 
@@ -49,13 +49,13 @@ int		ft_get_index(char *str)
 	return (0);
 }
 
-char	*ft_cut_white(char *str)
+char		*ft_cut_white(char *str)
 {
-	char *tmp;
-	int len;
-	int i;
-	int y;
-	int index;
+	char	*tmp;
+	int		len;
+	int		i;
+	int		y;
+	int		index;
 
 	index = ft_get_index(str);
 	len = ft_count_char(str);

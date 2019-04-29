@@ -22,7 +22,6 @@ int		ft_check_exec(char *s)
 	if (s[0] != 's' && s[0] != 'p' && s[0] != 'r')
 		return (ERROR);
 	if (s[0] == 's' && (s[1] == 'a' || s[1] == 'b' || s[1] == 's') && len == 2)
-
 		return (SUCCESS);
 	else if (s[0] == 'p' && (s[1] == 'a' || s[1] == 'b') && len == 2)
 		return (SUCCESS);

@@ -31,7 +31,7 @@ int		ft_exec_ra(t_size *size)
 		size->pa[i] = tab[i];
 		i++;
 	}
-	ft_putendl("ra");
+	ft_fill_elem_with(size, "ra", 5);
 	return (1);
 }
 
@@ -54,7 +54,7 @@ int		ft_exec_rb(t_size *size)
 		size->pb[i] = tab[i];
 		i++;
 	}
-	ft_putendl("rb");
+	ft_fill_elem_with(size, "rb", 6);
 	return (1);
 }
 
@@ -77,7 +77,7 @@ int		ft_exec_rra(t_size *size)
 		size->pa[i] = tab[i];
 		i++;
 	}
-	ft_putendl("rra");
+	ft_fill_elem_with(size, "rra", 7);
 	return (1);
 }
 
@@ -92,7 +92,7 @@ int		ft_exec_rrb(t_size *size)
 	i = 1;
 	y = 0;
 	tab[0] = size->pb[size->nbb - 1];
-	while (i <size->nbb)
+	while (i < size->nbb)
 		tab[i++] = size->pb[y++];
 	i = 0;
 	while (i < size->nbb)
@@ -100,7 +100,6 @@ int		ft_exec_rrb(t_size *size)
 		size->pb[i] = tab[i];
 		i++;
 	}
-	ft_putendl("rrb");
+	ft_fill_elem_with(size, "rrb", 8);
 	return (1);
 }
-

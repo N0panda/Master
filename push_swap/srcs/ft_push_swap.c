@@ -6,36 +6,26 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 14:32:24 by ythomas           #+#    #+#             */
-/*   Updated: 2019/03/15 14:33:40 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/04/26 18:15:39 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int 	ft_get_indicator(t_size *size)
+int		ft_get_indicator(t_size *size)
 {
 	int i;
-	int signe;
-	int alpha;
 
 	i = size->a - 1;
-	signe = 1;
-	alpha = 0;
 	while (i > 0)
 	{
-		if (size->pa[i] < size->pa[i - 1] && signe == 1)
+		if (size->pa[i] < size->pa[i - 1])
 		{
-			signe = 0;
-			alpha++;
-		}
-		else if (size->pa[i] > size->pa[i - 1] && signe == 0)
-		{
-			signe = 1;
-			alpha++;
+			return (0);
 		}
 		i--;
 	}
-	return (alpha);
+	return (1);
 }
 
 int		ft_timetosort(t_size *size)
@@ -44,12 +34,12 @@ int		ft_timetosort(t_size *size)
 	int i;
 
 	i = 0;
-	if ((alpha = ft_get_indicator(size)) == 0)
-		return (SUCCESS);
+	if ((alpha = ft_get_indicator(size)) == 1)
+		return (0);
 	while (i < size->a)
 		size->pb[i++] = 0;
 	ft_simple_sort(size);
-	return (SUCCESS);
+	return (1);
 }
 
 int		main(int argc, char **argv)
@@ -65,10 +55,18 @@ int		main(int argc, char **argv)
 	if (check_format_a(argc, argv) == ERROR)
 		ft_exit();
 	size->pa = ft_fill_pile_a(argc, argv, size);
-	if (!(size->pb = (int *)malloc(sizeof (int) * (size->a))))
+	if (!(size->pb = (int *)malloc(sizeof(int) * (size->a))))
 		ft_exit();
 	if (ft_same_num(size) == 0)
 		ft_exit();
-	ft_timetosort(size);
+	if (ft_timetosort(size) == 0)
+		exit(EXIT_SUCCESS);
+	ft_optimize_elem(size);
+	while (size->elem != NULL)
+	{
+		ft_putendl(size->elem->action);
+		size->elem = size->elem->next;
+	}
+	exit(EXIT_SUCCESS);
 	return (SUCCESS);
 }

@@ -35,6 +35,14 @@ int		ft_check_sort(t_size *size)
 	return (SUCCESS);
 }
 
+void	ft_init_size(t_size *size)
+{
+	size->a = 0;
+	size->b = 0;
+	size->pa = NULL;
+	size->pb = NULL;
+}
+
 int		main(int argc, char **argv)
 {
 	t_exec	*list;
@@ -45,10 +53,7 @@ int		main(int argc, char **argv)
 	if (!(size = (t_size *)malloc(sizeof(t_size))))
 		ft_exit();
 	list = NULL;
-	size->a = 0;
-	size->b = 0;
-	size->pa = NULL;
-	size->pb = NULL;
+	ft_init_size(size);
 	if (argc < 2)
 		ft_exit();
 	if (check_format_a(argc, argv) == ERROR)
@@ -57,22 +62,10 @@ int		main(int argc, char **argv)
 	if (ft_same_num(size) == 0)
 		ft_exit();
 	list = ft_get_exec(&nb_exec);
-	if (!(size->pb = (int *)malloc(sizeof (int) * (size->a))))
+	if (!(size->pb = (int *)malloc(sizeof(int) * (size->a))))
 		ft_exit();
 	ft_do_exec(list, size);
-	int i = 0;
-	// 	printf("-----------------------------------------------------------\n");
-	// 		printf("------------------ P I L E _ A----------------------\n");
-	// 		printf("-----------------------------------------------------------\n");
-	// while (i < size->nba)
-	// 	printf("#[%d]\n", size->pa[i++]);
-	// i = 0;
-	// printf("-----------------------------------------------------------\n");
-	// 	printf("------------------ P I L E _ B----------------------\n");
-	// 	printf("-----------------------------------------------------------\n");
-	// while (i < size->nbb)
-	// 	printf("#[%d]\n", size->pb[i++]);
 	ft_check_sort(size);
-	ft_putnbr(nb_exec);
+	exit(EXIT_SUCCESS);
 	return (SUCCESS);
 }

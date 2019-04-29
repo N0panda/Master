@@ -89,7 +89,7 @@ int		ft_exec_rrb(t_size *size)
 	i = 1;
 	y = 0;
 	tab[0] = size->pb[size->nbb - 1];
-	while (i <size->nbb)
+	while (i < size->nbb)
 		tab[i++] = size->pb[y++];
 	i = 0;
 	while (i < size->nbb)
