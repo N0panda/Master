@@ -6,7 +6,7 @@
 #    By: ythomas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:45:26 by ythomas           #+#    #+#              #
-#    Updated: 2019/02/03 12:39:59 by ythomas          ###   ########.fr        #
+#    Updated: 2019/04/30 15:30:46 by ythomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = libft.a
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc
+
+INC = libft.h
 
 SRC = ft_atoi.c ft_memcmp.c ft_putstr.c ft_striteri.c \
 ft_strnstr.c ft_bzero.c ft_memcpy.c ft_putstr_fd.c ft_strjoin.c ft_strrchr.c \
@@ -37,7 +39,7 @@ $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
-%.o: $(SRC_DIR)%.c $(INC)
+%.o: %.c $(INC)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)

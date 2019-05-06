@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 18:39:56 by ythomas           #+#    #+#             */
-/*   Updated: 2019/04/29 13:11:12 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/04/30 18:58:19 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,42 @@ static char			*ft_input_line(char **line, char *tab)
 	return (tab);
 }
 
+static int			ft_mercilanorme(char **tb, int fd)
+{
+	if (tb[fd] == NULL)
+	{
+		free(tb[fd]);
+		return (0);
+	}
+	if (tb[fd][0] == '\0')
+	{
+		free(tb[fd]);
+		tb[fd] = NULL;
+	}
+	return (1);
+}
+
+void				ft_gnl_exit(void)
+{
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
+
+int					ft_parsing(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 's' && str[i] != 'p' && str[i] != 'a' && str[i] != 'b'
+			&& str[i] != '\n' && str[i] != 'r')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int					get_next_line(const int fd, char **line)
 {
 	static char		*tb[OPEN_MAX];
@@ -53,15 +89,14 @@ int					get_next_line(const int fd, char **line)
 		&& (lu = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[lu] = '\0';
+		if (ft_parsing(buf) == 0)
+			ft_gnl_exit();
 		tmp = tb[fd];
 		tb[fd] = tb[fd] ? ft_strjoin(tb[fd], buf) : ft_strdup(buf);
 		ft_strdel(&tmp);
 	}
 	tb[fd] = ft_input_line(line, tb[fd]);
-	if (tb[fd] == NULL)
-	{
-		free(tb[fd]);
-		return (0);
-	}
+	if (tb[fd] == NULL || tb[fd][0] == '\0')
+		return (ft_mercilanorme(tb, fd));
 	return (1);
 }

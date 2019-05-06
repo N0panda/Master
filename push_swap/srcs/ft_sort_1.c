@@ -78,5 +78,12 @@ void		ft_quicksort(t_size *size, int start, int nb_push, int choix)
 
 void		ft_simple_sort(t_size *size)
 {
-	ft_quicksort(size, 0, size->nba, 0);
+	if (size->a == 1)
+		return ;
+	else if (size->a <= 3)
+		ft_small_sort(size);
+	else if (size->a <= 10)
+		ft_medium_sort(size);
+	else
+		ft_quicksort(size, 0, size->nba, 0);
 }

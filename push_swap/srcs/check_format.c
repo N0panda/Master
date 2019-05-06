@@ -20,8 +20,13 @@ int		ft_check_av(char *str)
 	while (str[i])
 	{
 		while (str[i] == ' ' || str[i] == '\t')
+		{
+			if (str[i + 1] == '\0')
+				return (ERROR);
 			i++;
-		if ((str[i] == '+' || str[i] == '-') && i == 0)
+		}
+		if (((str[i] == '+' || str[i] == '-') && str[i + 1] != '\0')
+			&& i == 0)
 			i++;
 		else if ((str[i] == '+' || str[i] == '-') && i != 0
 			&& (str[i - 1] == ' ' || str[i - 1] == '\t')

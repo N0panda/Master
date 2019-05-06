@@ -13,9 +13,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "../libft/libft.h"
 # define ERROR 0
 # define SUCCESS 1
-# include "../libft/libft.h"
 
 typedef struct				s_exec
 {
@@ -77,5 +77,9 @@ void						ft_optimize_elem(t_size *size);
 void						ft_sort_a2(t_size *size);
 void						ft_sort_b2(t_size *size);
 void						ft_rollback(t_size *size, int choix, int nb);
+void						ft_small_sort(t_size *s);
+void						ft_medium_sort(t_size *size);
+void						ft_exec_pb2(t_size *size, int *tab, int *tabb);
+void						ft_exec_pa2(t_size *size, int *tab, int *tabb);
 
 #endif

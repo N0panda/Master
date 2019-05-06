@@ -42,6 +42,27 @@ int		ft_timetosort(t_size *size)
 	return (1);
 }
 
+void	ft_final_free(t_size *size)
+{
+	t_instru	*tmp;
+
+	while (size->elem->next != NULL)
+	{
+		tmp = size->elem->next;
+		free(size->elem->action);
+		free(size->elem);
+		size->elem = tmp;
+	}
+	if (size->elem != NULL)
+	{
+		free(size->elem->action);
+		free(size->elem);
+	}
+	free(size->pa);
+	free(size->pb);
+	free(size);
+}
+
 int		main(int argc, char **argv)
 {
 	t_size	*size;
@@ -62,11 +83,6 @@ int		main(int argc, char **argv)
 	if (ft_timetosort(size) == 0)
 		exit(EXIT_SUCCESS);
 	ft_optimize_elem(size);
-	while (size->elem != NULL)
-	{
-		ft_putendl(size->elem->action);
-		size->elem = size->elem->next;
-	}
-	exit(EXIT_SUCCESS);
-	return (SUCCESS);
+	ft_final_free(size);
+	return (0);
 }

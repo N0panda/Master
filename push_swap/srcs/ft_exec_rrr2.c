@@ -14,10 +14,12 @@
 
 int		ft_exec_ra(t_size *size)
 {
-	int tab[size->nba];
+	int *tab;
 	int i;
 	int y;
 
+	if (!(tab = (int *)malloc(sizeof(int) * size->nba)))
+		ft_exit();
 	if (size->nba < 2)
 		return (0);
 	i = 0;
@@ -32,15 +34,18 @@ int		ft_exec_ra(t_size *size)
 		i++;
 	}
 	ft_fill_elem_with(size, "ra", 5);
+	free(tab);
 	return (1);
 }
 
 int		ft_exec_rb(t_size *size)
 {
-	int tab[size->nbb];
+	int *tab;
 	int i;
 	int y;
 
+	if (!(tab = (int *)malloc(sizeof(int) * size->nbb)))
+		ft_exit();
 	if (size->nbb < 2)
 		return (0);
 	i = 0;
@@ -55,15 +60,18 @@ int		ft_exec_rb(t_size *size)
 		i++;
 	}
 	ft_fill_elem_with(size, "rb", 6);
+	free(tab);
 	return (1);
 }
 
 int		ft_exec_rra(t_size *size)
 {
-	int tab[size->nba];
+	int *tab;
 	int i;
 	int y;
 
+	if (!(tab = (int *)malloc(sizeof(int) * size->nba)))
+		ft_exit();
 	if (size->nba < 2)
 		return (0);
 	i = 1;
@@ -78,15 +86,18 @@ int		ft_exec_rra(t_size *size)
 		i++;
 	}
 	ft_fill_elem_with(size, "rra", 7);
+	free(tab);
 	return (1);
 }
 
 int		ft_exec_rrb(t_size *size)
 {
-	int tab[size->nbb];
+	int *tab;
 	int i;
 	int y;
 
+	if (!(tab = (int *)malloc(sizeof(int) * size->nbb)))
+		ft_exit();
 	if (size->nbb < 2)
 		return (0);
 	i = 1;
@@ -101,5 +112,6 @@ int		ft_exec_rrb(t_size *size)
 		i++;
 	}
 	ft_fill_elem_with(size, "rrb", 8);
+	free(tab);
 	return (1);
 }

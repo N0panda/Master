@@ -59,7 +59,10 @@ t_exec	*ft_get_exec(int *nb)
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
 		if (ft_check_exec(line) == ERROR)
+		{
+			free(line);
 			ft_exit();
+		}
 		if (depart == NULL)
 			depart = ft_creat_maillon(line, nb);
 		else
@@ -69,6 +72,7 @@ t_exec	*ft_get_exec(int *nb)
 				maillon = maillon->next;
 			maillon->next = ft_creat_maillon(line, nb);
 		}
+		free(line);
 	}
 	return (depart);
 }

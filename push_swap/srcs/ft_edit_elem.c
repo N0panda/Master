@@ -6,7 +6,7 @@
 /*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 14:34:35 by ythomas           #+#    #+#             */
-/*   Updated: 2019/04/26 18:14:07 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/04/30 19:01:07 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void			ft_cut_elem(t_size *size, int nb)
 		i++;
 	}
 	fin = size->elem->next->next->next;
+	free(size->elem->next->next->action);
 	free(size->elem->next->next);
+	free(size->elem->next->action);
 	free(size->elem->next);
 	size->elem->next = fin;
 	size->elem = tmp;
@@ -62,12 +64,20 @@ void			ft_cut_elem(t_size *size, int nb)
 
 void			ft_optimize_elem(t_size *size)
 {
-	int nb;
+	int			nb;
+	t_instru	*tmp;
 
 	while ((nb = ft_del_double(size)) != 0)
 	{
 		ft_cut_elem(size, nb);
 	}
+	tmp = size->elem;
+	while (size->elem != NULL)
+	{
+		ft_putendl(size->elem->action);
+		size->elem = size->elem->next;
+	}
+	size->elem = tmp;
 	return ;
 }
 

@@ -43,6 +43,30 @@ void	ft_init_size(t_size *size)
 	size->pb = NULL;
 }
 
+void	ft_free_checker(t_exec *list, t_size *size)
+{
+	t_exec *tmp;
+
+	if (list)
+	{
+		while (list->next != NULL)
+		{
+			tmp = list->next;
+			free(list->param);
+			free(list);
+			list = tmp;
+		}
+		if (list != NULL)
+		{
+			free(list->param);
+			free(list);
+		}
+	}
+	free(size->pa);
+	free(size->pb);
+	free(size);
+}
+
 int		main(int argc, char **argv)
 {
 	t_exec	*list;
@@ -55,7 +79,7 @@ int		main(int argc, char **argv)
 	list = NULL;
 	ft_init_size(size);
 	if (argc < 2)
-		ft_exit();
+		return (SUCCESS);
 	if (check_format_a(argc, argv) == ERROR)
 		ft_exit();
 	size->pa = ft_fill_pile_a(argc, argv, size);
@@ -66,6 +90,6 @@ int		main(int argc, char **argv)
 		ft_exit();
 	ft_do_exec(list, size);
 	ft_check_sort(size);
-	exit(EXIT_SUCCESS);
+	ft_free_checker(list, size);
 	return (SUCCESS);
 }
