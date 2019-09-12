@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 00:35:56 by root              #+#    #+#             */
-/*   Updated: 2019/06/24 19:48:19 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/09/11 17:26:24 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,7 @@ int				full_process(t_god *god)
 	return (tmp);
 }
 
-void			does_path_exist(t_god *god, int a, int b)
-{
-	if (is_there_a_path(god, NULL, a, b))
-		ft_printf("%~{155;255;155}");
-	else
-		ft_printf("%~{255;155;155}");
-	ft_printf("%d-%d%~{}\n", a, b);
-}
-
-void 			init_paths(t_god *god)
+void			init_paths(t_god *god)
 {
 	int i;
 
@@ -52,11 +43,7 @@ void 			init_paths(t_god *god)
 
 int				lets_calcul(t_god *god)
 {
-	//print_room_infos(god);
 	init_paths(god);
 	full_process(god);
-	//ft_printf("[%d]\n", god->turn);
-	//print_paths(god);
-	//print_final_paths(god);
 	return (0);
 }

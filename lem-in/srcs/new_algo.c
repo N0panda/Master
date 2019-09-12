@@ -3,59 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   new_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ythomas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ythomas <ythomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 14:52:16 by ythomas           #+#    #+#             */
-/*   Updated: 2019/07/24 14:52:47 by ythomas          ###   ########.fr       */
+/*   Updated: 2019/09/11 16:34:15 by ythomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/head.h"
 
-int 			next_is_it_trigger(t_god *god, int room, int last_one)
-{
-	int i;
-
-	i = 0;
-	while (i < god->rooms[room]->nb_of_connexions)
-	{
-		if (god->rooms[room]->connexions[i]->id != god->rooms[room]->id
-		&& god->rooms[room]->connexions[i]->id != god->extremities[0]->id
-		&& god->rooms[room]->blocked == 1
-		&& is_it_connected(god, room, god->rooms[room]->connexions[i]->id) == 1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int 			basic_test_do_trigger(t_god *god, t_lemin *room, int i, int j)
-{
-	if (room->tmp_used[j] == 0 
-		&& room->connexions[j]->gone == 1
-		&& room->id != god->extremities[0]->id
-		&& room->connexions[j]->id != god->extremities[0]->id
-		&& room->blocked == 1
-		&& room->connexions[j]->id != room->last_room->id
-		&& is_it_connected(god, room->id, room->connexions[j]->id) == 1)
-		return (1);
-	else
-		return (0);
-}
-
-void 			do_the_trigger(t_lemin *room, t_ints tab, int i, int j)
-{
-	int nb;
-
-	tab[0] = tab[0] + 1;
-	nb = tab[0];
-	tab[nb] = room->connexions[j]->id;
-	room->connexions[j]->weight = room->weight - 1;
-	room->connexions[j]->last_room = room;
-	room->surcharged = 1;
-}
-
-void			check_possible_trigger(t_god *god, t_ints last_p, t_piles *stack)
+void			check_possible_trigger(t_god *god,
+		t_ints last_p, t_piles *stack)
 {
 	int i;
 	int j;
@@ -81,34 +39,7 @@ void			check_possible_trigger(t_god *god, t_ints last_p, t_piles *stack)
 	}
 }
 
-int 			test_g_one(t_god *god, t_lemin *room, int i, int j)
-{
-	if (room->connexions[j]->gone == 1
-	&& room->tmp_used[j] == 0
-	&& room->connexions[j]->id != god->extremities[0]->id
-	&& room->last_room != NULL
-	&& room->connexions[j]->id != room->last_room->id
-	&& is_it_connected(god, room->id, room->connexions[j]->id) == 0
-	&& ((room->nb_of_connexions == 2 
-	&& next_is_it_trigger(god, room->connexions[j]->id, room->id) == 1)
-	|| room->last_room->surcharged == 1)
-	&& ((room->weight + 1 <= room->connexions[j]->weight)
-	|| room->connexions[j]->weight == 0))
-		return (1);
-	return (0);
-}
-
-int 			zero_tst(t_god *god, t_lemin *room, int i, int j)
-{
-	if (room->connexions[j]->gone == 0 && room->tmp_used[j] == 0
-	&& room->connexions[j]->id != god->extremities[0]->id
-	&& room->surcharged == 0)
-		return (1);
-	else
-		return (0);
-}
-
-int 			get_next_rooms(t_god *god, t_piles *stack,
+int				get_next_rooms(t_god *god, t_piles *stack,
 	t_ints lp, t_ints new_p)
 {
 	int i[2];
@@ -138,7 +69,7 @@ int 			get_next_rooms(t_god *god, t_piles *stack,
 	return (stack->finish);
 }
 
-int 			get_faster_path(t_god *god)
+int				get_faster_path(t_god *god)
 {
 	t_piles stack;
 
@@ -159,10 +90,10 @@ int 			get_faster_path(t_god *god)
 	return (stack.finish);
 }
 
-int 			breadth_first_search(t_god *god, int *stat)
+int				breadth_first_search(t_god *god, int *stat)
 {
-	int 		nb_finish;
-	int 		nb;
+	int			nb_finish;
+	int			nb;
 
 	nb_finish = 0;
 	while (nb_finish < god->goulots && *stat != 2)
@@ -179,12 +110,10 @@ int 			breadth_first_search(t_god *god, int *stat)
 				(nb = ft_evaluate_set_of_path(god, nb_finish)) < god->turn)
 					save_actual_set(god, nb_finish, nb);
 				else if (nb_finish == god->variation && nb > god->turn)
-					break;
+					break ;
 			}
 		}
-		clear_gone(god);
-		refresh_tmp_links(god);
-		add_gone(god, nb_finish);
+		refresh_package(god, nb_finish);
 	}
 	return (nb_finish);
 }
